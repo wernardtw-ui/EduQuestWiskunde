@@ -812,346 +812,69 @@
 
   ];
 
- // --- Game State & Elements ---
-  const questionText = document.getElementById("questionText");
-  const questionHint = document.getElementById("questionHint");
-  const drawPile = document.getElementById("drawPile");
-  const chainSlots = document.getElementById("chainSlots");
-  const discardPile = document.getElementById("discardPile");
-  const timerEl = document.getElementById("timerEl");
-  const correctScoreEl = document.getElementById("correctScoreEl");
-  const incorrectScoreEl = document.getElementById("incorrectScoreEl");
-  const hintBtn = document.getElementById("hintBtn");
-  const geminiHintBtn = document.getElementById("geminiHintBtn");
-  const speakBtn = document.getElementById("speakBtn");
-  const restartBtn = document.getElementById("restartBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const categorySelect = document.getElementById("categorySelect");
-  const difficultySelect = document.getElementById("difficultySelect");
-  const audioPlayer = document.getElementById("audioPlayer");
-
-  let questions = [];
-  let currentQuestion = null;
-  let drawCards = [];
-  let chainCards = [];
-  let discardCards = [];
-  let time = 60;
-  let timerId = null;
+  // A function to handle the question data and select options
+  let currentQuestions = [];
+  let currentQuestionIndex = 0;
   let correctScore = 0;
   let incorrectScore = 0;
-
-  // --- Gemini API Call Functions ---
-  const GEMINI_LLM_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=';
-  const GEMINI_TTS_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=';
-  const API_KEY = ''; // This will be handled by the environment
-
-  function base64ToArrayBuffer(base64) {
-      const binaryString = window.atob(base64);
-      const len = binaryString.length;
-      const bytes = new Uint8Array(len);
-      for (let i = 0; i < len; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-      }
-      return bytes.buffer;
-  }
+  const timerDuration = 60;
+  let timeRemaining = timerDuration;
+  let timerInterval;
+  let hasBeenAnswered = false;
+  const questionTextEl = document.getElementById('questionText');
+  const questionHintEl = document.getElementById('questionHint');
+  const drawPileEl = document.getElementById('drawPile');
+  const chainSlotsEl = document.getElementById('chainSlots');
+  const discardPileEl = document.getElementById('discardPile');
+  const nextBtn = document.getElementById('nextBtn');
+  const restartBtn = document.getElementById('restartBtn');
+  const correctScoreEl = document.getElementById('correctScoreEl');
+  const incorrectScoreEl = document.getElementById('incorrectScoreEl');
+  const timerEl = document.getElementById('timerEl');
+  const categorySelect = document.getElementById('categorySelect');
+  const difficultySelect = document.getElementById('difficultySelect');
+  const hintBtn = document.getElementById('hintBtn');
+  const geminiHintBtn = document.getElementById('geminiHintBtn');
+  const speakBtn = document.getElementById('speakBtn');
+  const audioPlayer = document.getElementById('audioPlayer');
   
-  function pcmToWav(pcmData, sampleRate = 16000) {
-      const buffer = new ArrayBuffer(44 + pcmData.length * 2);
-      const view = new DataView(buffer);
-      let offset = 0;
-      view.setUint32(offset, 0x52494646, true); offset += 4;
-      view.setUint32(offset, 36 + pcmData.length * 2, true); offset += 4;
-      view.setUint32(offset, 0x57415645, true); offset += 4;
-      view.setUint32(offset, 0x666d7420, true); offset += 4;
-      view.setUint32(offset, 16, true); offset += 4;
-      view.setUint16(offset, 1, true); offset += 2;
-      view.setUint16(offset, 1, true); offset += 2;
-      view.setUint32(offset, sampleRate, true); offset += 4;
-      view.setUint32(offset, sampleRate * 2, true); offset += 4;
-      view.setUint16(offset, 2, true); offset += 2;
-      view.setUint16(offset, 16, true); offset += 2;
-      view.setUint32(offset, 0x64617461, true); offset += 4;
-      view.setUint32(offset, pcmData.length * 2, true); offset += 4;
-      for (let i = 0; i < pcmData.length; i++) {
-          view.setInt16(offset, pcmData[i], true);
-          offset += 2;
-      }
-      return new Blob([view], { type: 'audio/wav' });
-  }
-
-  async function getGeminiHint() {
-      geminiHintBtn.disabled = true;
-      const originalText = geminiHintBtn.textContent;
-      geminiHintBtn.textContent = 'Wenk word gegenereer...';
-
-      const nextEmptySlotIndex = chainCards.findIndex(c => c === null);
-      if (nextEmptySlotIndex === -1) {
-          toast("Alle stappe is voltooi!");
-          geminiHintBtn.disabled = false;
-          geminiHintBtn.textContent = originalText;
-          return;
-      }
-      
-      const prompt = `Die wiskunde-vraag is: "${currentQuestion.text}". Die oplossing word in stappe aangebied. Die eerste ${nextEmptySlotIndex} stappe is alreeds geplaas. Gee 'n kort, een-sin-wenk vir die volgende stap in die oplossing. Moenie die presiese antwoord gee nie, slegs 'n leidraad. Die wenk moet in Afrikaans wees.`;
-      
-      try {
-          const payload = { contents: [{ parts: [{ text: prompt }] }] };
-          const response = await fetch(GEMINI_LLM_API_URL + API_KEY, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-          });
-          
-          if (!response.ok) {
-              throw new Error(`API error: ${response.statusText}`);
-          }
-          
-          const result = await response.json();
-          const hint = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (hint) {
-              questionHint.textContent = `✨ Gemini-wenk: ${hint}`;
-          } else {
-              toast("Kon nie 'n wenk genereer nie.");
-          }
-      } catch (error) {
-          console.error("Error generating hint:", error);
-          toast("Kon nie 'n wenk genereer nie. Probeer weer.");
-      } finally {
-          geminiHintBtn.disabled = false;
-          geminiHintBtn.textContent = originalText;
-      }
-  }
-
-  async function speakQuestion() {
-    speakBtn.disabled = true;
-    const originalText = speakBtn.textContent;
-    speakBtn.textContent = 'Klank word gelaai...';
-    const questionToSpeak = `Die vraag is: ${questionText.textContent}.`;
-    const payload = {
-        contents: [{ parts: [{ text: questionToSpeak }] }],
-        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Iapetus" } } } },
-    };
-    try {
-        const response = await fetch(GEMINI_TTS_API_URL + API_KEY, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        if (!response.ok) { throw new Error(`TTS API error: ${response.statusText}`); }
-        const result = await response.json();
-        const audioPart = result?.candidates?.[0]?.content?.parts?.[0];
-        const audioData = audioPart?.inlineData?.data;
-        const mimeType = audioPart?.inlineData?.mimeType;
-        if (audioData && mimeType && mimeType.startsWith("audio/")) {
-            const sampleRateMatch = mimeType.match(/rate=(\d+)/);
-            const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 16000;
-            const pcmData = base64ToArrayBuffer(audioData);
-            const pcm16 = new Int16Array(pcmData);
-            const wavBlob = pcmToWav(pcm16, sampleRate);
-            const audioUrl = URL.createObjectURL(wavBlob);
-            audioPlayer.src = audioUrl;
-            audioPlayer.play();
-            audioPlayer.onended = () => URL.revokeObjectURL(audioUrl);
-        } else {
-            toast("Kon nie klank genereer nie. Probeer weer.");
-        }
-    } catch (error) {
-        console.error("Error speaking question:", error);
-        toast("Fout met klankgenerering.");
-    } finally {
-        speakBtn.disabled = false;
-        speakBtn.textContent = originalText;
-    }
-  }
-
-  // --- GAME LOGIC FUNCTIONS ---
-  function loadQuestions() {
-    questions = questionsData;
-  }
-
-  function initSelectors() {
-    const categories = [...new Set(questions.map(q => q.category))];
-    const difficulties = [...new Set(questions.map(q => q.difficulty))];
-    categories.unshift("Alles");
-    difficulties.unshift("Alles");
-    categorySelect.innerHTML = '';
-    difficulties.forEach(diff => {
-      const option = document.createElement('option');
-      option.value = diff;
-      option.textContent = diff;
-      difficultySelect.appendChild(option);
-    });
-    categories.forEach(cat => {
-      const option = document.createElement('option');
-      option.value = cat;
-      option.textContent = cat;
-      categorySelect.appendChild(option);
-    });
-  }
-
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  function loadQuestion() {
-    clearInterval(timerId);
-    timerId = null;
-    time = 60;
-    timerEl.textContent = time;
-    drawCards = [];
-    chainCards = [];
-    discardCards = [];
-    nextBtn.disabled = true;
-    questionHint.textContent = '';
+  // A function to get the questions based on the selected category and difficulty
+  function getQuestions() {
     const selectedCategory = categorySelect.value;
     const selectedDifficulty = difficultySelect.value;
-    const filteredQuestions = questions.filter(q =>
-      (selectedCategory === 'Alles' || q.category === selectedCategory) &&
-      (selectedDifficulty === 'Alles' || q.difficulty === selectedDifficulty)
-    );
-    if (filteredQuestions.length === 0) {
-      toast("Geen vrae gevind vir hierdie keuse nie.");
-      return;
-    }
-    currentQuestion = filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
-    questionText.innerHTML = currentQuestion.text;
-    const allCards = currentQuestion.solution.map((s, i) => ({
-      id: `s-${i}`, text: s, isCorrect: true, originalIndex: i
-    })).concat(currentQuestion.distractors.map((d, i) => ({
-      id: `d-${i}`, text: d, isCorrect: false
-    })));
-    shuffle(allCards);
-    drawCards = allCards;
-    chainCards = Array(currentQuestion.solution.length).fill(null);
-    renderPiles();
-    renderChainSlots();
-    if (typeof MathJax !== 'undefined') { MathJax.typesetPromise(); }
-  }
-
-  function renderPiles() {
-    drawPile.innerHTML = '';
-    discardPile.innerHTML = '';
-    drawCards.forEach(card => drawPile.appendChild(createCardElement(card)));
-    discardCards.forEach(card => discardPile.appendChild(createCardElement(card)));
-    if (typeof MathJax !== 'undefined') { MathJax.typesetPromise(); }
-  }
-
-  function renderChainSlots() {
-    chainSlots.innerHTML = '';
-    chainCards.forEach((card, index) => {
-      const slot = document.createElement("div");
-      slot.classList.add("card-slot");
-      slot.dataset.index = index;
-      slot.addEventListener("dragover", e => e.preventDefault());
-      slot.addEventListener("drop", onSlotDrop);
-      if (card) {
-        slot.appendChild(createCardElement(card));
-      }
-      chainSlots.appendChild(slot);
-    });
-    if (typeof MathJax !== 'undefined') { MathJax.typesetPromise(); }
-  }
-  
-  function createCardElement(card) {
-    const el = document.createElement("div");
-    el.classList.add("card");
-    el.textContent = card.text;
-    el.draggable = true;
-    el.dataset.id = card.id;
-    el.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("text/plain", card.id);
-      e.dataTransfer.dropEffect = "move";
-      setTimeout(() => el.classList.add("dragging"), 0);
-    });
-    el.addEventListener("dragend", () => el.classList.remove("dragging"));
-    return el;
-  }
-  
-  function onSlotDrop(e) {
-    e.preventDefault();
-    startTimerOnce();
-    const slot = e.currentTarget;
-    const cardId = e.dataTransfer.getData("text/plain");
-    const card = drawCards.find(c => c.id === cardId);
-    if (card) {
-      const slotIndex = parseInt(slot.dataset.index, 10);
-      let isCorrectOrder = false;
-      if (card.isCorrect && card.originalIndex === slotIndex && chainCards[slotIndex] === null) {
-        isCorrectOrder = true;
-      }
-      if (isCorrectOrder) {
-        chainCards[slotIndex] = card;
-        drawCards = drawCards.filter(c => c.id !== cardId);
-        slot.innerHTML = '';
-        const droppedCardEl = createCardElement(card);
-        slot.appendChild(droppedCardEl);
-        slot.classList.add("correct");
-        checkWinCondition();
-      } else {
-        const cardEl = drawPile.querySelector(`[data-id='${cardId}']`);
-        if(cardEl) { cardEl.remove(); }
-        discardCards.push(card);
-        discardPile.appendChild(createCardElement(card));
-        toast("❌ Verkeerde stap. Probeer weer.", 1500);
-      }
-      renderPiles();
-    }
-  }
-
-  function checkWinCondition() {
-    if (chainCards.every(card => card !== null)) {
-      clearInterval(timerId);
-      lockGame();
-      correctScore++;
-      correctScoreEl.textContent = correctScore;
-      // saveScores(); // This line is now removed
-      toast("🎉 Korrek! Alle stappe is in plek.", 2500);
-      nextBtn.disabled = false;
-    }
-  }
-
-  function highlightHint() {
-    if (chainCards.every(c => c !== null)) return;
-    const nextEmptySlotIndex = chainCards.findIndex(c => c === null);
-    if (nextEmptySlotIndex !== -1) {
-      const hintText = currentQuestion.solution[nextEmptySlotIndex];
-      questionHint.innerHTML = `Wenk: Vind die kaart wat sê "${hintText}" en plaas dit in die volgende leë gleuf.`;
-    }
-    toast("💡 Wenk onthul", 2500);
-  }
-
-  function startTimerOnce() {
-    if (timerId) return;
-    timerId = setInterval(() => {
-      time--;
-      timerEl.textContent = time;
-      if (time <= 0) {
-        clearInterval(timerId);
-        lockGame();
-        toast("⏱ Tyd is op!");
-        nextBtn.disabled = false;
-        incorrectScore++;
-        incorrectScoreEl.textContent = incorrectScore;
-        // saveScores(); // This line is now removed
-      }
-    }, 1000);
-  }
-
-  function lockGame() {
-    document.querySelectorAll(".card").forEach(el => el.draggable = false);
-    document.querySelectorAll(".card-slot").forEach(slot => {
-        slot.removeEventListener("drop", onSlotDrop);
-        slot.classList.remove('drag-over');
+    return questionsData.filter(q => {
+      return (selectedCategory === 'all' || q.category === selectedCategory) &&
+             (selectedDifficulty === 'all' || q.difficulty === selectedDifficulty);
     });
   }
-  
-  function toast(msg, duration = 3000) {
-    const container = document.querySelector('.toast-container');
-    const el = document.createElement('div');
-    el.classList.add('toast');
-    el.textContent = msg;
-    container.appendChild(el);
-    setTimeout(() => el.remove(), duration);
+
+ // The function that populates the category and difficulty dropdowns
+function initSelectors() {
+  const categories = [...new Set(questionsData.map(q => q.category))];
+  categories.unshift('all');
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+    categorySelect.appendChild(option);
+  });
+
+  const difficulties = [...new Set(questionsData.map(q => q.difficulty))];
+  difficulties.unshift('all');
+  difficulties.forEach(difficulty => {
+    const option = document.createElement('option');
+    option.value = difficulty;
+    option.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+    difficultySelect.appendChild(option);
+  });
+}
+
+  // The function to load a question
+  function loadQuestion() {
+    // ... rest of the loadQuestion function
   }
+
+  // The rest of your functions, e.g., for drag and drop, scoring, etc.
   
   // --- EVENT LISTENERS & INIT ---
   hintBtn.addEventListener("click", highlightHint);
@@ -1162,8 +885,8 @@
   categorySelect.addEventListener("change", loadQuestion);
   difficultySelect.addEventListener("change", loadQuestion);
   
-  drawPile.addEventListener("dragover", e => e.preventDefault());
-  drawPile.addEventListener("drop", e => {
+  drawPileEl.addEventListener("dragover", e => e.preventDefault());
+  drawPileEl.addEventListener("drop", e => {
     e.preventDefault();
     const cardId = e.dataTransfer.getData("text/plain");
     const cardIndex = discardCards.findIndex(c => c.id === cardId);
@@ -1174,7 +897,7 @@
       toast("✅ Stap herstel - probeer weer!", 1200);
     }
   });
-  
+
   window.onload = function() {
     loadQuestions();
     initSelectors();
