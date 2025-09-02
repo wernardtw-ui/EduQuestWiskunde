@@ -94,32 +94,7 @@
     90%{opacity:1; transform:translateY(0);}
     100%{opacity:0; transform:translateY(20px);}
   }
-  .user-info{
-    background: var(--panel);
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: bold;
-    margin-bottom: 16px;
-  }
-  .game-stats {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-  }
-  .score-info {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--ok);
-  }
-  .score-label {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
+  
   /* --- Mobile Optimizations --- */
   @media (max-width: 768px) {
     body {
@@ -159,10 +134,6 @@
 </style>
 </head>
 <body>
-
-<div class="user-info">
-  <span id="userIdDisplay">Gebruiker-ID laai...</span>
-</div>
 
 <h1>EduQuestWiskunde</h1>
 <div class="toolbar">
@@ -217,11 +188,8 @@
 <audio id="audioPlayer"></audio>
 
 <script type="module">
-  // Firebase imports
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-  import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
+  // All Firebase-related code has been removed.
+ 
   // Data from questions.json embedded directly to avoid fetch errors
   const questionsData = [
 { "text": "Bereken: 25 + 37", "solution": [ "25 + 37 = 62", "Antwoord: 62" ], "distractors": [ "Antwoord: 52", "Antwoord: 63", "Antwoord: 60" ], "category": "Heelgetalle", "difficulty": "Maklik" },
@@ -846,88 +814,7 @@
 
   ];
 
-  // --- Firebase and Firestore Setup ---
-  let db, auth;
-  let userId = 'loading...';
-  let isAuthReady = false;
-  const appId = 'default-app-id'; // This can be a default or placeholder
-  const userIdDisplay = document.getElementById('userIdDisplay');
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAl_inLrHEvA05aRuizjIScPWs8orhaezc",
-    authDomain: "eduquestmaths.firebaseapp.com",
-    projectId: "eduquestmaths",
-    storageBucket: "eduquestmaths.appspot.com",
-    messagingSenderId: "38155185854",
-    appId: "1:38155185854:web:48e596eb6a39c4bac578ef",
-    measurementId: "G-8K5YDC8H6X"
-  };
-
-  try {
-      const app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      auth = getAuth(app);
-      setPersistence(auth, browserSessionPersistence);
-
-      onAuthStateChanged(auth, async (user) => {
-          if (user) {
-              userId = user.uid;
-              userIdDisplay.textContent = `Gebruikers-ID: ${userId}`;
-              isAuthReady = true;
-              await loadScores();
-          }
-      });
-
-      signInAnonymously(auth).catch((error) => {
-          console.error("Anonymous sign-in failed:", error);
-          userId = 'temp-user-' + crypto.randomUUID();
-          userIdDisplay.textContent = 'Auth failed, using temporary ID';
-          isAuthReady = true;
-      });
-
-  } catch (e) {
-      console.error("Firebase initialization failed:", e);
-      userIdDisplay.textContent = 'Auth failed, using temporary ID';
-      userId = 'temp-user-' + crypto.randomUUID();
-      isAuthReady = true;
-  }
-
-  // Firestore functions
-  const saveScores = async () => {
-    if (!isAuthReady || userId.startsWith('temp-user')) return;
-    try {
-      const userDocRef = doc(db, `users/${userId}/gameData/solitaireScores`);
-      await setDoc(userDocRef, {
-        correctScore: correctScore,
-        incorrectScore: incorrectScore,
-        lastUpdated: new Date()
-      }, { merge: true });
-      console.log("Scores saved successfully!");
-    } catch (e) {
-      console.error("Error saving scores:", e);
-    }
-  };
-
-  const loadScores = async () => {
-    if (!isAuthReady || userId.startsWith('temp-user')) return;
-    try {
-      const userDocRef = doc(db, `users/${userId}/gameData/solitaireScores`);
-      const docSnap = await getDoc(userDocRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        correctScore = data.correctScore || 0;
-        incorrectScore = data.incorrectScore || 0;
-        correctScoreEl.textContent = correctScore;
-        incorrectScoreEl.textContent = incorrectScore;
-        console.log("Scores loaded successfully!");
-      }
-    } catch (e) {
-      console.error("Error loading scores:", e);
-    }
-  };
-
-  // --- Game State & Elements ---
+ // --- Game State & Elements ---
   const questionText = document.getElementById("questionText");
   const questionHint = document.getElementById("questionHint");
   const drawPile = document.getElementById("drawPile");
@@ -954,16 +841,342 @@
   let timerId = null;
   let correctScore = 0;
   let incorrectScore = 0;
+
+  // --- Gemini API Call Functions ---
+  const GEMINI_LLM_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=';
+  const GEMINI_TTS_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=';
+  const API_KEY = ''; // This will be handled by the environment
+
+  function base64ToArrayBuffer(base64) {
+      const binaryString = window.atob(base64);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+      }
+      return bytes.buffer;
+  }
   
-  // --- Game Logic ---
+  function pcmToWav(pcmData, sampleRate = 16000) {
+      const buffer = new ArrayBuffer(44 + pcmData.length * 2);
+      const view = new DataView(buffer);
+      let offset = 0;
+      view.setUint32(offset, 0x52494646, true); offset += 4;
+      view.setUint32(offset, 36 + pcmData.length * 2, true); offset += 4;
+      view.setUint32(offset, 0x57415645, true); offset += 4;
+      view.setUint32(offset, 0x666d7420, true); offset += 4;
+      view.setUint32(offset, 16, true); offset += 4;
+      view.setUint16(offset, 1, true); offset += 2;
+      view.setUint16(offset, 1, true); offset += 2;
+      view.setUint32(offset, sampleRate, true); offset += 4;
+      view.setUint32(offset, sampleRate * 2, true); offset += 4;
+      view.setUint16(offset, 2, true); offset += 2;
+      view.setUint16(offset, 16, true); offset += 2;
+      view.setUint32(offset, 0x64617461, true); offset += 4;
+      view.setUint32(offset, pcmData.length * 2, true); offset += 4;
+      for (let i = 0; i < pcmData.length; i++) {
+          view.setInt16(offset, pcmData[i], true);
+          offset += 2;
+      }
+      return new Blob([view], { type: 'audio/wav' });
+  }
+
+  async function getGeminiHint() {
+      geminiHintBtn.disabled = true;
+      const originalText = geminiHintBtn.textContent;
+      geminiHintBtn.textContent = 'Wenk word gegenereer...';
+
+      const nextEmptySlotIndex = chainCards.findIndex(c => c === null);
+      if (nextEmptySlotIndex === -1) {
+          toast("Alle stappe is voltooi!");
+          geminiHintBtn.disabled = false;
+          geminiHintBtn.textContent = originalText;
+          return;
+      }
+      
+      const prompt = `Die wiskunde-vraag is: "${currentQuestion.text}". Die oplossing word in stappe aangebied. Die eerste ${nextEmptySlotIndex} stappe is alreeds geplaas. Gee 'n kort, een-sin-wenk vir die volgende stap in die oplossing. Moenie die presiese antwoord gee nie, slegs 'n leidraad. Die wenk moet in Afrikaans wees.`;
+      
+      try {
+          const payload = { contents: [{ parts: [{ text: prompt }] }] };
+          const response = await fetch(GEMINI_LLM_API_URL + API_KEY, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+          });
+          
+          if (!response.ok) {
+              throw new Error(`API error: ${response.statusText}`);
+          }
+          
+          const result = await response.json();
+          const hint = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (hint) {
+              questionHint.textContent = `✨ Gemini-wenk: ${hint}`;
+          } else {
+              toast("Kon nie 'n wenk genereer nie.");
+          }
+      } catch (error) {
+          console.error("Error generating hint:", error);
+          toast("Kon nie 'n wenk genereer nie. Probeer weer.");
+      } finally {
+          geminiHintBtn.disabled = false;
+          geminiHintBtn.textContent = originalText;
+      }
+  }
+
+  async function speakQuestion() {
+    speakBtn.disabled = true;
+    const originalText = speakBtn.textContent;
+    speakBtn.textContent = 'Klank word gelaai...';
+    const questionToSpeak = `Die vraag is: ${questionText.textContent}.`;
+    const payload = {
+        contents: [{ parts: [{ text: questionToSpeak }] }],
+        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Iapetus" } } } },
+    };
+    try {
+        const response = await fetch(GEMINI_TTS_API_URL + API_KEY, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!response.ok) { throw new Error(`TTS API error: ${response.statusText}`); }
+        const result = await response.json();
+        const audioPart = result?.candidates?.[0]?.content?.parts?.[0];
+        const audioData = audioPart?.inlineData?.data;
+        const mimeType = audioPart?.inlineData?.mimeType;
+        if (audioData && mimeType && mimeType.startsWith("audio/")) {
+            const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+            const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 16000;
+            const pcmData = base64ToArrayBuffer(audioData);
+            const pcm16 = new Int16Array(pcmData);
+            const wavBlob = pcmToWav(pcm16, sampleRate);
+            const audioUrl = URL.createObjectURL(wavBlob);
+            audioPlayer.src = audioUrl;
+            audioPlayer.play();
+            audioPlayer.onended = () => URL.revokeObjectURL(audioUrl);
+        } else {
+            toast("Kon nie klank genereer nie. Probeer weer.");
+        }
+    } catch (error) {
+        console.error("Error speaking question:", error);
+        toast("Fout met klankgenerering.");
+    } finally {
+        speakBtn.disabled = false;
+        speakBtn.textContent = originalText;
+    }
+  }
+
+  // --- GAME LOGIC FUNCTIONS ---
   function loadQuestions() {
     questions = questionsData;
   }
-  
-  // (The rest of your game logic functions like initSelectors, loadQuestion, etc. go here)
-  // ...
 
-  // --- Initialize ---
+  function initSelectors() {
+    const categories = [...new Set(questions.map(q => q.category))];
+    const difficulties = [...new Set(questions.map(q => q.difficulty))];
+    categories.unshift("Alles");
+    difficulties.unshift("Alles");
+    categorySelect.innerHTML = '';
+    difficulties.forEach(diff => {
+      const option = document.createElement('option');
+      option.value = diff;
+      option.textContent = diff;
+      difficultySelect.appendChild(option);
+    });
+    categories.forEach(cat => {
+      const option = document.createElement('option');
+      option.value = cat;
+      option.textContent = cat;
+      categorySelect.appendChild(option);
+    });
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function loadQuestion() {
+    clearInterval(timerId);
+    timerId = null;
+    time = 60;
+    timerEl.textContent = time;
+    drawCards = [];
+    chainCards = [];
+    discardCards = [];
+    nextBtn.disabled = true;
+    questionHint.textContent = '';
+    const selectedCategory = categorySelect.value;
+    const selectedDifficulty = difficultySelect.value;
+    const filteredQuestions = questions.filter(q =>
+      (selectedCategory === 'Alles' || q.category === selectedCategory) &&
+      (selectedDifficulty === 'Alles' || q.difficulty === selectedDifficulty)
+    );
+    if (filteredQuestions.length === 0) {
+      toast("Geen vrae gevind vir hierdie keuse nie.");
+      return;
+    }
+    currentQuestion = filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
+    questionText.innerHTML = currentQuestion.text;
+    const allCards = currentQuestion.solution.map((s, i) => ({
+      id: `s-${i}`, text: s, isCorrect: true, originalIndex: i
+    })).concat(currentQuestion.distractors.map((d, i) => ({
+      id: `d-${i}`, text: d, isCorrect: false
+    })));
+    shuffle(allCards);
+    drawCards = allCards;
+    chainCards = Array(currentQuestion.solution.length).fill(null);
+    renderPiles();
+    renderChainSlots();
+    if (typeof MathJax !== 'undefined') { MathJax.typesetPromise(); }
+  }
+
+  function renderPiles() {
+    drawPile.innerHTML = '';
+    discardPile.innerHTML = '';
+    drawCards.forEach(card => drawPile.appendChild(createCardElement(card)));
+    discardCards.forEach(card => discardPile.appendChild(createCardElement(card)));
+    if (typeof MathJax !== 'undefined') { MathJax.typesetPromise(); }
+  }
+
+  function renderChainSlots() {
+    chainSlots.innerHTML = '';
+    chainCards.forEach((card, index) => {
+      const slot = document.createElement("div");
+      slot.classList.add("card-slot");
+      slot.dataset.index = index;
+      slot.addEventListener("dragover", e => e.preventDefault());
+      slot.addEventListener("drop", onSlotDrop);
+      if (card) {
+        slot.appendChild(createCardElement(card));
+      }
+      chainSlots.appendChild(slot);
+    });
+    if (typeof MathJax !== 'undefined') { MathJax.typesetPromise(); }
+  }
+  
+  function createCardElement(card) {
+    const el = document.createElement("div");
+    el.classList.add("card");
+    el.textContent = card.text;
+    el.draggable = true;
+    el.dataset.id = card.id;
+    el.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", card.id);
+      e.dataTransfer.dropEffect = "move";
+      setTimeout(() => el.classList.add("dragging"), 0);
+    });
+    el.addEventListener("dragend", () => el.classList.remove("dragging"));
+    return el;
+  }
+  
+  function onSlotDrop(e) {
+    e.preventDefault();
+    startTimerOnce();
+    const slot = e.currentTarget;
+    const cardId = e.dataTransfer.getData("text/plain");
+    const card = drawCards.find(c => c.id === cardId);
+    if (card) {
+      const slotIndex = parseInt(slot.dataset.index, 10);
+      let isCorrectOrder = false;
+      if (card.isCorrect && card.originalIndex === slotIndex && chainCards[slotIndex] === null) {
+        isCorrectOrder = true;
+      }
+      if (isCorrectOrder) {
+        chainCards[slotIndex] = card;
+        drawCards = drawCards.filter(c => c.id !== cardId);
+        slot.innerHTML = '';
+        const droppedCardEl = createCardElement(card);
+        slot.appendChild(droppedCardEl);
+        slot.classList.add("correct");
+        checkWinCondition();
+      } else {
+        const cardEl = drawPile.querySelector(`[data-id='${cardId}']`);
+        if(cardEl) { cardEl.remove(); }
+        discardCards.push(card);
+        discardPile.appendChild(createCardElement(card));
+        toast("❌ Verkeerde stap. Probeer weer.", 1500);
+      }
+      renderPiles();
+    }
+  }
+
+  function checkWinCondition() {
+    if (chainCards.every(card => card !== null)) {
+      clearInterval(timerId);
+      lockGame();
+      correctScore++;
+      correctScoreEl.textContent = correctScore;
+      // saveScores(); // This line is now removed
+      toast("🎉 Korrek! Alle stappe is in plek.", 2500);
+      nextBtn.disabled = false;
+    }
+  }
+
+  function highlightHint() {
+    if (chainCards.every(c => c !== null)) return;
+    const nextEmptySlotIndex = chainCards.findIndex(c => c === null);
+    if (nextEmptySlotIndex !== -1) {
+      const hintText = currentQuestion.solution[nextEmptySlotIndex];
+      questionHint.innerHTML = `Wenk: Vind die kaart wat sê "${hintText}" en plaas dit in die volgende leë gleuf.`;
+    }
+    toast("💡 Wenk onthul", 2500);
+  }
+
+  function startTimerOnce() {
+    if (timerId) return;
+    timerId = setInterval(() => {
+      time--;
+      timerEl.textContent = time;
+      if (time <= 0) {
+        clearInterval(timerId);
+        lockGame();
+        toast("⏱ Tyd is op!");
+        nextBtn.disabled = false;
+        incorrectScore++;
+        incorrectScoreEl.textContent = incorrectScore;
+        // saveScores(); // This line is now removed
+      }
+    }, 1000);
+  }
+
+  function lockGame() {
+    document.querySelectorAll(".card").forEach(el => el.draggable = false);
+    document.querySelectorAll(".card-slot").forEach(slot => {
+        slot.removeEventListener("drop", onSlotDrop);
+        slot.classList.remove('drag-over');
+    });
+  }
+  
+  function toast(msg, duration = 3000) {
+    const container = document.querySelector('.toast-container');
+    const el = document.createElement('div');
+    el.classList.add('toast');
+    el.textContent = msg;
+    container.appendChild(el);
+    setTimeout(() => el.remove(), duration);
+  }
+  
+  // --- EVENT LISTENERS & INIT ---
+  hintBtn.addEventListener("click", highlightHint);
+  geminiHintBtn.addEventListener("click", getGeminiHint);
+  speakBtn.addEventListener("click", speakQuestion);
+  restartBtn.addEventListener("click", loadQuestion);
+  nextBtn.addEventListener("click", loadQuestion);
+  categorySelect.addEventListener("change", loadQuestion);
+  difficultySelect.addEventListener("change", loadQuestion);
+  
+  drawPile.addEventListener("dragover", e => e.preventDefault());
+  drawPile.addEventListener("drop", e => {
+    e.preventDefault();
+    const cardId = e.dataTransfer.getData("text/plain");
+    const cardIndex = discardCards.findIndex(c => c.id === cardId);
+    if (cardIndex !== -1) {
+      const card = discardCards.splice(cardIndex, 1)[0];
+      drawCards.push(card);
+      renderPiles();
+      toast("✅ Stap herstel - probeer weer!", 1200);
+    }
+  });
+  
   window.onload = function() {
     loadQuestions();
     initSelectors();
@@ -978,3 +1191,13 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
