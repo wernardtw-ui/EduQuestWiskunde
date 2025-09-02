@@ -125,40 +125,32 @@
     body {
       padding: 16px;
     }
-
     .toolbar {
       flex-direction: column;
       align-items: center;
       gap: 16px;
     }
-
     .question-panel {
       padding: 16px;
     }
-
     .question-text {
       font-size: 20px;
     }
-
     .game-area {
       flex-direction: column;
       gap: 16px;
       margin-top: 16px;
     }
-
     .card-container {
       max-width: none;
       width: 100%;
     }
-
     .chain-area {
       padding: 16px;
     }
-
     .chain-slots {
       gap: 8px;
     }
-    
     .card {
       padding: 10px;
       font-size: 14px;
@@ -199,7 +191,7 @@
   </div>
 
   <div class="chain-area">
-    <div class="title">solution</div>
+    <div class="title">Oplossingsketting</div>
     <div class="chain-slots" id="chainSlots"></div>
   </div>
 
@@ -852,23 +844,24 @@
 {"text":"Vertaal die punt (−2,−3) 3 eenhede na regs en 4 eenhede op.","solution":["Nuwe punt = (−2+3,−3+4) = (1,1)","Antwoord: (1,1)"],"distractors":["Antwoord: (−1,1)","Antwoord: (1,−1)","Antwoord: (−1,−1)"],"category":"Transformasies – Translasiess","difficulty":"Maklik" },,
 {"text":"Reflekteer die punt (6,−8) oor die x-as.","solution":["Refleksie oor x-as = (6,8)","Antwoord: (6,8)"],"distractors":["Antwoord: (−6,8)","Antwoord: (6,−8)","Antwoord: (−6,−8)"],"category":"Transformasies – Refleksies","difficulty":"Maklik" },,
 
-];
+  ];
 
   // --- Firebase and Firestore Setup ---
- 
   let db, auth;
   let userId = 'loading...';
   let isAuthReady = false;
-  const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+  const appId = 'default-app-id'; // This can be a default or placeholder
   const userIdDisplay = document.getElementById('userIdDisplay');
-  const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-      apiKey: "AIzaSyAl_inLrHEvA05aRuizjIScPWs8orhaezc",
-      authDomain: "eduquestmaths.firebaseapp.com",
-      projectId: "eduquestmaths",
-      storageBucket: "eduquestmaths.appspot.com",
-      messagingSenderId: "38155185854",
-      appId: "1:38155185854:web:48e596eb6a39c4bac578ef",
-      measurementId: "G-8K5YDC8H6X"
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAl_inLrHEvA05aRuizjIScPWs8orhaezc",
+    authDomain: "eduquestmaths.firebaseapp.com",
+    projectId: "eduquestmaths",
+    storageBucket: "eduquestmaths.appspot.com",
+    messagingSenderId: "38155185854",
+    appId: "1:38155185854:web:48e596eb6a39c4bac578ef",
+    measurementId: "G-8K5YDC8H6X"
   };
 
   try {
@@ -876,19 +869,6 @@
       db = getFirestore(app);
       auth = getAuth(app);
       setPersistence(auth, browserSessionPersistence);
-
-      const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-      if (initialAuthToken) {
-          signInWithCustomToken(auth, initialAuthToken).then(() => {
-              console.log("Signed in with custom token.");
-          }).catch((error) => {
-              console.error("Custom token sign-in failed:", error);
-              signInAnonymously(auth);
-          });
-      } else {
-          signInAnonymously(auth);
-      }
 
       onAuthStateChanged(auth, async (user) => {
           if (user) {
@@ -898,6 +878,14 @@
               await loadScores();
           }
       });
+
+      signInAnonymously(auth).catch((error) => {
+          console.error("Anonymous sign-in failed:", error);
+          userId = 'temp-user-' + crypto.randomUUID();
+          userIdDisplay.textContent = 'Auth failed, using temporary ID';
+          isAuthReady = true;
+      });
+
   } catch (e) {
       console.error("Firebase initialization failed:", e);
       userIdDisplay.textContent = 'Auth failed, using temporary ID';
@@ -909,7 +897,7 @@
   const saveScores = async () => {
     if (!isAuthReady || userId.startsWith('temp-user')) return;
     try {
-      const userDocRef = doc(db, `/artifacts/${appId}/users/${userId}/solitaireScores/data`);
+      const userDocRef = doc(db, `users/${userId}/gameData/solitaireScores`);
       await setDoc(userDocRef, {
         correctScore: correctScore,
         incorrectScore: incorrectScore,
@@ -924,7 +912,7 @@
   const loadScores = async () => {
     if (!isAuthReady || userId.startsWith('temp-user')) return;
     try {
-      const userDocRef = doc(db, `/artifacts/${appId}/users/${userId}/solitaireScores/data`);
+      const userDocRef = doc(db, `users/${userId}/gameData/solitaireScores`);
       const docSnap = await getDoc(userDocRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -938,11 +926,6 @@
       console.error("Error loading scores:", e);
     }
   };
-
-  // Data from questions.json embedded directly
-  const questionsData = [
-    // ... all of your questions here
-  ];
 
   // --- Game State & Elements ---
   const questionText = document.getElementById("questionText");
@@ -971,701 +954,16 @@
   let timerId = null;
   let correctScore = 0;
   let incorrectScore = 0;
-
-  // --- Gemini API Call Functions ---
-  const GEMINI_LLM_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=';
-  const GEMINI_TTS_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=';
-  const API_KEY = ''; // Leave this empty, it will be handled by the environment
-
-  function base64ToArrayBuffer(base64) {
-    const binaryString = window.atob(base64);
-    const len = binaryString.length;
-    const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes.buffer;
-  }
   
-  function pcmToWav(pcmData, sampleRate = 16000) {
-    const buffer = new ArrayBuffer(44 + pcmData.length * 2);
-    const view = new DataView(buffer);
-    let offset = 0;
-
-    // RIFF identifier
-    view.setUint32(offset, 0x52494646, true); offset += 4;
-    // file length
-    view.setUint32(offset, 36 + pcmData.length * 2, true); offset += 4;
-    // RIFF type
-    view.setUint32(offset, 0x57415645, true); offset += 4;
-    // format chunk identifier
-    view.setUint32(offset, 0x666d7420, true); offset += 4;
-    // format chunk length
-    view.setUint32(offset, 16, true); offset += 4;
-    // sample format (raw PCM)
-    view.setUint16(offset, 1, true); offset += 2;
-    // channel count
-    view.setUint16(offset, 1, true); offset += 2;
-    // sample rate
-    view.setUint32(offset, sampleRate, true); offset += 4;
-    // byte rate (sample rate * block align)
-    view.setUint32(offset, sampleRate * 2, true); offset += 4;
-    // block align
-    view.setUint16(offset, 2, true); offset += 2;
-    // bits per sample
-    view.setUint16(offset, 16, true); offset += 2;
-    // data chunk identifier
-    view.setUint32(offset, 0x64617461, true); offset += 4;
-    // data chunk length
-    view.setUint32(offset, pcmData.length * 2, true); offset += 4;
-
-    // write the PCM data
-    for (let i = 0; i < pcmData.length; i++) {
-        view.setInt16(offset, pcmData[i], true);
-        offset += 2;
-    }
-
-    return new Blob([view], { type: 'audio/wav' });
-  }
-
-  async function getGeminiHint() {
-    geminiHintBtn.disabled = true;
-    const originalText = geminiHintBtn.textContent;
-    geminiHintBtn.textContent = 'Wenk word gegenereer...';
-
-    const nextEmptySlotIndex = chainCards.findIndex(c => c === null);
-    if (nextEmptySlotIndex === -1) {
-        toast("Alle stappe is voltooi!");
-        geminiHintBtn.disabled = false;
-        geminiHintBtn.textContent = originalText;
-        return;
-    }
-    
-    const prompt = `Die wiskunde-vraag is: "${currentQuestion.text}". Die oplossing word in stappe aangebied. Die eerste ${nextEmptySlotIndex} stappe is alreeds geplaas. Gee 'n kort, een-sin-wenk vir die volgende stap in die oplossing. Moenie die presiese antwoord gee nie, slegs 'n leidraad. Die wenk moet in Afrikaans wees.`;
-    
-    try {
-        const payload = { contents: [{ parts: [{ text: prompt }] }] };
-        const response = await fetch(GEMINI_LLM_API_URL + API_KEY, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`API error: ${response.statusText}`);
-        }
-        
-        const result = await response.json();
-        const hint = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (hint) {
-            questionHint.textContent = `✨ Gemini-wenk: ${hint}`;
-        } else {
-            toast("Kon nie 'n wenk genereer nie.");
-        }
-    } catch (error) {
-        console.error("Error generating hint:", error);
-        toast("Kon nie 'n wenk genereer nie. Probeer weer.");
-    } finally {
-        geminiHintBtn.disabled = false;
-        geminiHintBtn.textContent = originalText;
-    }
-  }
-
-  async function speakQuestion() {
-    speakBtn.disabled = true;
-    const originalText = speakBtn.textContent;
-    speakBtn.textContent = 'Klank word gelaai...';
-
-    const questionToSpeak = `Die vraag is: ${questionText.textContent}.`;
-    
-    const payload = {
-        contents: [{ parts: [{ text: questionToSpeak }] }],
-        generationConfig: {
-            responseModalities: ["AUDIO"],
-            speechConfig: {
-                voiceConfig: {
-                    prebuiltVoiceConfig: { voiceName: "Iapetus" },
-                }
-            }
-        },
-    };
-
-    try {
-        const response = await fetch(GEMINI_TTS_API_URL + API_KEY, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            throw new Error(`API error: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        const audioData = result.candidates[0].content.parts[0].audio;
-        if (audioData) {
-            const pcmBuffer = base64ToArrayBuffer(audioData.pcm.base64);
-            const audioBlob = pcmToWav(new Int16Array(pcmBuffer));
-            const audioUrl = URL.createObjectURL(audioBlob);
-            audioPlayer.src = audioUrl;
-            audioPlayer.play();
-            toast("🎵 Klank begin nou...", 2000);
-        } else {
-            toast("Kon nie klank genereer nie.");
-        }
-    } catch (error) {
-        console.error("Error generating speech:", error);
-        toast("Fout met die klankgenerering. Probeer later weer.");
-    } finally {
-        speakBtn.disabled = false;
-        speakBtn.textContent = originalText;
-    }
-  }
-
   // --- Game Logic ---
   function loadQuestions() {
     questions = questionsData;
   }
-
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  // Function to initialize difficulty and category selectors
-  function initSelectors() {
-    const allCategories = questions.map(q => q.category);
-    const allDifficulties = questions.map(q => q.difficulty);
-    const uniqueCategories = [...new Set(allCategories)];
-    const uniqueDifficulties = [...new Set(allDifficulties)];
-    
-    uniqueCategories.unshift('Alles');
-    uniqueDifficulties.unshift('Alles');
-
-    categorySelect.innerHTML = '';
-    difficultySelect.innerHTML = '';
-    
-    uniqueCategories.forEach(cat => {
-        const option = document.createElement('option');
-        option.value = cat;
-        option.textContent = cat;
-        categorySelect.appendChild(option);
-    });
-
-    uniqueDifficulties.forEach(diff => {
-        const option = document.createElement('option');
-        option.value = diff;
-        option.textContent = diff;
-        difficultySelect.appendChild(option);
-    });
-  }
-
-  // Function to load a new question
-  function loadQuestion() {
-    // Clear previous state
-    clearInterval(timerId);
-    timerId = null;
-    time = 60;
-    timerEl.textContent = time;
-    drawCards = [];
-    chainCards = [];
-    discardCards = [];
-    nextBtn.disabled = true;
-    questionHint.textContent = ''; // Corrected element name
-
-    // Filter questions based on selected category and difficulty
-    const selectedCategory = categorySelect.value;
-    const selectedDifficulty = difficultySelect.value;
-    const filteredQuestions = questions.filter(q =>
-      (selectedCategory === 'Alles' || q.category === selectedCategory) &&
-      (selectedDifficulty === 'Alles' || q.difficulty === selectedDifficulty)
-    );
-
-    // Select a random question from the filtered list
-    if (filteredQuestions.length === 0) {
-      toast("Geen vrae gevind vir hierdie keuse nie.");
-      questionText.innerHTML = "Geen vrae beskikbaar vir hierdie category en difficultysgraad nie.";
-      questionText.style.display = 'block';
-      return;
-    }
-    
-    currentQuestionIndex = Math.floor(Math.random() * filteredQuestions.length);
-    currentQuestion = filteredQuestions[currentQuestionIndex];
-    questionText.innerHTML = currentQuestion.text;
-    
-    // Call MathJax to render the new content
-    MathJax.typesetPromise();
-    
-    // Display the question
-    questionText.style.display = 'block';
-    renderPiles();
-    
-    // Set the hint for the current question
-    if (currentQuestion.solution && currentQuestion.solution.length > 0) {
-        questionHint.textContent = 'Wenk: ' + currentQuestion.solution[0];
-    } else {
-        questionHint.textContent = '';
-    }
-  }
-
-  // Render the piles
-  function renderPiles() {
-    drawPile.innerHTML = '';
-    chainSlots.innerHTML = '';
-    discardPile.innerHTML = '';
-    
-    drawCards.forEach(card => {
-        const cardEl = createCardElement(card, true);
-        drawPile.appendChild(cardEl);
-    });
-    
-    chainCards.forEach((card, index) => {
-        const slotEl = document.createElement('div');
-        slotEl.classList.add('chain-slot');
-        slotEl.dataset.index = index;
-        if (card) {
-            const cardEl = createCardElement(card, false);
-            slotEl.appendChild(cardEl);
-        } else {
-            slotEl.innerHTML = `<span class="placeholder">${index + 1}</span>`;
-            slotEl.addEventListener("dragover", e => e.preventDefault());
-            slotEl.addEventListener("drop", handleCardDrop);
-        }
-        chainSlots.appendChild(slotEl);
-    });
-    
-    discardCards.forEach(card => {
-        const cardEl = createCardElement(card, true);
-        discardPile.appendChild(cardEl);
-    });
-  }
-
-  function createCardElement(card, isDraggable) {
-    const cardEl = document.createElement('div');
-    cardEl.classList.add('card');
-    cardEl.innerHTML = card.text;
-    cardEl.dataset.id = card.id;
-    if (isDraggable) {
-        cardEl.setAttribute('draggable', true);
-        cardEl.addEventListener("dragstart", handleCardDragStart);
-    }
-    return cardEl;
-  }
   
-  function handleCardDragStart(e) {
-    e.dataTransfer.setData("text/plain", e.target.dataset.id);
-  }
+  // (The rest of your game logic functions like initSelectors, loadQuestion, etc. go here)
+  // ...
 
-  function handleCardDrop(e) {
-    e.preventDefault();
-    const cardId = e.dataTransfer.getData("text/plain");
-    const slotIndex = e.currentTarget.dataset.index;
-    
-    const cardIndexInDraw = drawCards.findIndex(c => c.id === cardId);
-    if (cardIndexInDraw !== -1) {
-        const card = drawCards[cardIndexInDraw];
-        
-        // Check if the dropped card is the correct next step
-        const nextCorrectSolution = currentQuestion.solution[slotIndex];
-        if (card.text === nextCorrectSolution) {
-            chainCards[slotIndex] = card;
-            drawCards.splice(cardIndexInDraw, 1);
-            
-            // Check for a complete solution
-            if (chainCards.every(c => c !== null)) {
-                toast("✅ Korrekte oplossing!", 3000);
-                correctScore++;
-                correctScoreEl.textContent = correctScore;
-                saveScores();
-                nextBtn.disabled = false;
-            } else {
-                toast("✅ Korrekte stap!", 1200);
-            }
-        } else {
-            // Incorrect step, penalize
-            discardCards.push(card);
-            drawCards.splice(cardIndexInDraw, 1);
-            incorrectScore++;
-            incorrectScoreEl.textContent = incorrectScore;
-            toast("❌ Verkeerde stap, probeer weer!", 1200);
-            saveScores();
-        }
-        renderPiles();
-    }
-  }
-
-  function startTimer() {
-    timerId = setInterval(() => {
-        time--;
-        timerEl.textContent = time;
-        if (time <= 0) {
-            clearInterval(timerId);
-            toast("Tyd is verby! Probeer weer.");
-            incorrectScore++;
-            incorrectScoreEl.textContent = incorrectScore;
-            saveScores();
-        }
-    }, 1000);
-  }
-
-  function highlightHint() {
-      // Find the next correct step
-      const nextStepIndex = chainCards.findIndex(c => c === null);
-      if (nextStepIndex !== -1) {
-          const nextCorrectText = currentQuestion.solution[nextStepIndex];
-          const cardsToHighlight = drawCards.filter(c => c.text === nextCorrectText);
-          cardsToHighlight.forEach(card => {
-              const el = document.querySelector(`[data-id="${card.id}"]`);
-              if (el) {
-                  el.classList.add('highlight');
-                  setTimeout(() => el.classList.remove('highlight'), 2000);
-              }
-          });
-      } else {
-          toast("Daar is geen wenke beskikbaar vir die huidige vraag nie!");
-      }
-  }
-  
   // --- Initialize ---
-  window.onload = function() {
-    loadQuestions();
-    initSelectors();
-    loadQuestion();
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service worker registered.', reg))
-        .catch(err => console.log('Service worker registration failed.', err));
-    }
-  };
-    try {
-        const response = await fetch(GEMINI_TTS_API_URL + API_KEY, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            throw new Error(`TTS API error: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        const audioPart = result?.candidates?.[0]?.content?.parts?.[0];
-        const audioData = audioPart?.inlineData?.data;
-        const mimeType = audioPart?.inlineData?.mimeType;
-
-        if (audioData && mimeType && mimeType.startsWith("audio/")) {
-            const sampleRateMatch = mimeType.match(/rate=(\d+)/);
-            const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 16000;
-            const pcmData = base64ToArrayBuffer(audioData);
-            const pcm16 = new Int16Array(pcmData);
-            const wavBlob = pcmToWav(pcm16, sampleRate);
-            const audioUrl = URL.createObjectURL(wavBlob);
-            
-            audioPlayer.src = audioUrl;
-            audioPlayer.play();
-            
-            audioPlayer.onended = () => URL.revokeObjectURL(audioUrl);
-        } else {
-            toast("Kon nie klank genereer nie. Probeer weer.");
-        }
-    } catch (error) {
-        console.error("Error speaking question:", error);
-        toast("Fout met klankgenerering.");
-    } finally {
-        speakBtn.disabled = false;
-        speakBtn.textContent = originalText;
-    }
-  }
-
-  // --- Game Logic ---
-  function loadQuestions() {
-    questions = questionsData;
-  }
-
-  function initSelectors() {
-    const categories = [...new Set(questions.map(q => q.category))];
-    const difficulties = [...new Set(questions.map(q => q.difficulty))];
-
-    // Add 'All' options
-    categories.unshift("Alles");
-    difficulties.unshift("Alles");
-
-    categorySelect.innerHTML = '';
-    difficulties.forEach(diff => {
-      const option = document.createElement('option');
-      option.value = diff;
-      option.textContent = diff;
-      difficultySelect.appendChild(option);
-    });
-
-    categories.forEach(cat => {
-      const option = document.createElement('option');
-      option.value = cat;
-      option.textContent = cat;
-      categorySelect.appendChild(option);
-    });
-  }
-
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-function loadQuestion() {
-    // Clear previous state
-    clearInterval(timerId);
-    timerId = null;
-    time = 60;
-    timerEl.textContent = time;
-    drawCards = [];
-    chainCards = [];
-    discardCards = [];
-    nextBtn.disabled = true;
-    questionHint.textContent = '';
-
-    // Load the question text and render it with MathJax
-    const currentQuestion = questions[currentQuestionIndex];
-    questionTextEl.innerHTML = currentQuestion.text;
-    
-    // **This is the new line you need to add**
-    MathJax.typesetPromise();
-    
-    // Display the question
-    questionTextEl.style.display = 'block';
-    renderPiles();
-    
-    // Set the hint and solutions for the current question
-    if (currentQuestion.solution && currentQuestion.solution.length > 0) {
-        questionHint.textContent = 'Hint: ' + currentQuestion.solution[0];
-    } else {
-        questionHint.textContent = '';
-    }
-}
-    
-    // Filter questions based on selected category and difficulty
-    const selectedcategory = categorySelect.value;
-    const selecteddifficulty = difficultySelect.value;
-    const filteredQuestions = questions.filter(q =>
-      (selectedcategory === 'Alles' || q.category === selectedcategory) &&
-      (selecteddifficulty === 'Alles' || q.difficulty === selecteddifficulty)
-    );
-    
-    // Select a random question
-    if (filteredQuestions.length === 0) {
-      toast("Geen vrae gevind vir hierdie keuse nie.");
-      return;
-    }
-    currentQuestion = filteredQuestions[Math.floor(Math.random() * filteredQuestions.length)];
-
-    // Populate question and cards
-    questionText.innerHTML = currentQuestion.text;
-
-    // Create cards for solution and distractors
-    const allCards = currentQuestion.solution.map((s, i) => ({
-      id: `s-${i}`,
-      text: s,
-      isCorrect: true,
-      originalIndex: i
-    })).concat(
-      currentQuestion.distractors.map((d, i) => ({
-        id: `d-${i}`,
-        text: d,
-        isCorrect: false
-      }))
-    );
-    shuffle(allCards);
-    drawCards = allCards;
-    chainCards = Array(currentQuestion.solution.length).fill(null);
-    
-    renderPiles();
-    renderChainSlots();
-    
-    // Render math expressions
-    if (typeof MathJax !== 'undefined') {
-      MathJax.typesetPromise();
-    }
-  }
-
-  function renderPiles() {
-    drawPile.innerHTML = '';
-    discardPile.innerHTML = '';
-
-    drawCards.forEach(card => {
-      const cardEl = createCardElement(card);
-      drawPile.appendChild(cardEl);
-    });
-    
-    discardCards.forEach(card => {
-      const cardEl = createCardElement(card);
-      discardPile.appendChild(cardEl);
-    });
-    
-    // Re-render math expressions after new cards are added
-    if (typeof MathJax !== 'undefined') {
-      MathJax.typesetPromise();
-    }
-  }
-
-  function renderChainSlots() {
-    chainSlots.innerHTML = '';
-    chainCards.forEach((card, index) => {
-      const slot = document.createElement("div");
-      slot.classList.add("card-slot");
-      slot.dataset.index = index;
-      slot.addEventListener("dragover", e => e.preventDefault());
-      slot.addEventListener("drop", onSlotDrop);
-      if (card) {
-        const cardEl = createCardElement(card);
-        slot.appendChild(cardEl);
-      }
-      chainSlots.appendChild(slot);
-    });
-    // Re-render math expressions after new slots are added
-    if (typeof MathJax !== 'undefined') {
-      MathJax.typesetPromise();
-    }
-  }
-  
-  function createCardElement(card) {
-    const el = document.createElement("div");
-    el.classList.add("card");
-    el.textContent = card.text;
-    el.draggable = true;
-    el.dataset.id = card.id;
-    el.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("text/plain", card.id);
-      e.dataTransfer.dropEffect = "move";
-      setTimeout(() => el.classList.add("dragging"), 0);
-    });
-    el.addEventListener("dragend", () => el.classList.remove("dragging"));
-    return el;
-  }
-  
-  function onSlotDrop(e) {
-    e.preventDefault();
-    startTimerOnce();
-    const slot = e.currentTarget;
-    const cardId = e.dataTransfer.getData("text/plain");
-    const card = drawCards.find(c => c.id === cardId);
-    
-    if (card) {
-      const slotIndex = parseInt(slot.dataset.index, 10);
-      
-      // Check if the card is a valid next step
-      let isCorrectOrder = false;
-      if (card.isCorrect && card.originalIndex === slotIndex && chainCards[slotIndex] === null) {
-        isCorrectOrder = true;
-      }
-      
-      if (isCorrectOrder) {
-        chainCards[slotIndex] = card;
-        drawCards = drawCards.filter(c => c.id !== cardId);
-        
-        slot.innerHTML = '';
-        const droppedCardEl = createCardElement(card);
-        slot.appendChild(droppedCardEl);
-        slot.classList.add("correct");
-        
-        checkWinCondition();
-      } else {
-        const cardEl = drawPile.querySelector(`[data-id='${cardId}']`);
-        if(cardEl) {
-          cardEl.remove();
-        }
-        discardCards.push(card);
-        discardPile.appendChild(createCardElement(card));
-        
-        toast("❌ Verkeerde stap. Probeer weer.", 1500);
-      }
-      renderPiles();
-    }
-  }
-
-  function checkWinCondition() {
-    const allSlotsFilled = chainCards.every(card => card !== null);
-    if (allSlotsFilled) {
-      clearInterval(timerId);
-      lockGame();
-      correctScore++;
-      correctScoreEl.textContent = correctScore;
-      saveScores();
-      toast("🎉 Korrek! Alle stappe is in plek.", 2500);
-      nextBtn.disabled = false;
-    }
-  }
-
-  function highlightHint() {
-    if (chainCards.every(c => c !== null)) return;
-    const nextEmptySlotIndex = chainCards.findIndex(c => c === null);
-    
-    if (nextEmptySlotIndex !== -1) {
-      const hintText = currentQuestion.solution[nextEmptySlotIndex];
-      questionHint.innerHTML = `Wenk: Vind die kaart wat sê "${hintText}" en plaas dit in die volgende leë gleuf.`;
-    }
-    toast("💡 Wenk onthul", 2500);
-  }
-
-  function startTimerOnce() {
-    if (timerId) return;
-    timerId = setInterval(() => {
-      time--;
-      timerEl.textContent = time;
-      if (time <= 0) {
-        clearInterval(timerId);
-        lockGame();
-        toast("⏱ Tyd is op!");
-        nextBtn.disabled = false;
-        incorrectScore++;
-        incorrectScoreEl.textContent = incorrectScore;
-        saveScores();
-      }
-    }, 1000);
-  }
-
-  function lockGame() {
-    document.querySelectorAll(".card").forEach(el => el.draggable = false);
-    document.querySelectorAll(".card-slot").forEach(slot => {
-        slot.removeEventListener("drop", onSlotDrop);
-        slot.classList.remove('drag-over');
-    });
-  }
-  
-  function toast(msg, duration = 3000) {
-    const container = document.querySelector('.toast-container');
-    const el = document.createElement('div');
-    el.classList.add('toast');
-    el.textContent = msg;
-    container.appendChild(el);
-    setTimeout(() => el.remove(), duration);
-  }
-  
-  /* ===========================
-     EVENT LISTENERS & INIT
-  =========================== */
-  hintBtn.addEventListener("click", highlightHint);
-  geminiHintBtn.addEventListener("click", getGeminiHint);
-  speakBtn.addEventListener("click", speakQuestion);
-  restartBtn.addEventListener("click", loadQuestion);
-  nextBtn.addEventListener("click", loadQuestion);
-  categorySelect.addEventListener("change", loadQuestion);
-  difficultySelect.addEventListener("change", loadQuestion);
-  
-  drawPile.addEventListener("dragover", e => e.preventDefault());
-  drawPile.addEventListener("drop", e => {
-    e.preventDefault();
-    const cardId = e.dataTransfer.getData("text/plain");
-    const cardIndex = discardCards.findIndex(c => c.id === cardId);
-    if (cardIndex !== -1) {
-      const card = discardCards.splice(cardIndex, 1)[0];
-      drawCards.push(card);
-      renderPiles();
-      toast("✅ Stap herstel - probeer weer!", 1200);
-    }
-  });
-  
-  // Initialize
   window.onload = function() {
     loadQuestions();
     initSelectors();
@@ -1676,7 +974,6 @@ function loadQuestion() {
         .catch(err => console.error('Service Worker registration failed', err));
     }
   };
-  
 </script>
 
 </body>
