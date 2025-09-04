@@ -1,19 +1,20 @@
-{
-  "term": "Term 4",
-  "topics": [
-    {
-      "name": "Datahantering",
-      "questions": [
-        {
-          "text": "Versamel die data: 2, 3, 3, 4, 5, 5, 6, 6, 6. Wat is die modus?",
-          "steps": [
-            { "text": "Tel hoe gereeld elke getal voorkom", "hint": "Kyk na frekwensie" },
-            { "text": "Getal 6 kom die meeste keer voor", "hint": "6 kom 3 keer voor" },
-            { "text": "Modus = 6", "hint": "Modus is die mees algemene waarde" }
-          ],
-          "distractors": ["3", "5", "4"]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "text": "Los op: 3x + 7 = 16. Wat is x?",
+    "solution": ["3"],
+    "distractors": ["2", "4", "5"],
+    "hint": "Trek 7 af en deel deur 3."
+  },
+  {
+    "text": "Wat is die waarde van 15 ÷ 3?",
+    "solution": ["5"],
+    "distractors": ["3", "4", "6"],
+    "hint": "Hoeveel keer gaan 3 in 15?"
+  },
+  {
+    "text": "Wat is 7 × 4?",
+    "solution": ["28"],
+    "distractors": ["21", "24", "32"],
+    "hint": "Vermenigvuldig 7 met 4."
+  }
+]

@@ -1,19 +1,20 @@
-{
-  "term": "Term 2",
-  "topics": [
-    {
-      "name": "Breuke & Desimale",
-      "questions": [
-        {
-          "text": "Vereenvoudig: 12/18",
-          "steps": [
-            { "text": "Deel teller en noemer deur 6", "hint": "Soek die grootste gemene deler" },
-            { "text": "12 ÷ 6 = 2 en 18 ÷ 6 = 3", "hint": "Bereken beide kante" },
-            { "text": "Antwoord = 2/3", "hint": "Finale vereenvoudigde breuk" }
-          ],
-          "distractors": ["6/9", "4/9", "3/5"]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "text": "Los op: 5x + 3 = 18. Wat is x?",
+    "solution": ["3"],
+    "distractors": ["2", "4", "5"],
+    "hint": "Eerstens trek 3 af, dan deel deur 5."
+  },
+  {
+    "text": "Wat is die som van 7 + 6?",
+    "solution": ["13"],
+    "distractors": ["12", "14", "15"],
+    "hint": "Tel 7 en 6 bymekaar."
+  },
+  {
+    "text": "Wat is die produk van 4 × 3?",
+    "solution": ["12"],
+    "distractors": ["7", "14", "10"],
+    "hint": "Vermenigvuldig 4 met 3."
+  }
+]

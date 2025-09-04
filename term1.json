@@ -1,33 +1,20 @@
-{
-  "term": "Term 1",
-  "topics": [
-    {
-      "name": "Algebra",
-      "questions": [
-        {
-          "text": "Los op: 3x + 5 = 20",
-          "steps": [
-            { "text": "3x = 20 - 5", "hint": "Beweeg die +5 oor na die ander kant" },
-            { "text": "3x = 15", "hint": "Vereenvoudig 20 - 5" },
-            { "text": "x = 5", "hint": "Deel beide kante deur 3" }
-          ],
-          "distractors": ["x = 15", "x = 25", "x = 3"]
-        }
-      ]
-    },
-    {
-      "name": "Meetkunde",
-      "questions": [
-        {
-          "text": "Bereken die oppervlakte van 'n driehoek met basis 10 cm en hoogte 5 cm.",
-          "steps": [
-            { "text": "Oppervlakte = 1/2 × basis × hoogte", "hint": "Formule vir driehoek se oppervlakte" },
-            { "text": "Oppervlakte = 1/2 × 10 × 5", "hint": "Vervang basis = 10 en hoogte = 5" },
-            { "text": "Oppervlakte = 25 cm²", "hint": "Bereken 1/2 × 10 × 5" }
-          ],
-          "distractors": ["50 cm²", "30 cm²", "15 cm²"]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "text": "Wat is 8 + 5?",
+    "solution": ["13"],
+    "distractors": ["12", "14", "15"],
+    "hint": "Tel 8 en 5 bymekaar."
+  },
+  {
+    "text": "Los op: 2x = 10. Wat is x?",
+    "solution": ["5"],
+    "distractors": ["2", "10", "4"],
+    "hint": "Deel beide kante deur 2."
+  },
+  {
+    "text": "Wat is die modus van die getalle: 2, 3, 3, 4, 5?",
+    "solution": ["3"],
+    "distractors": ["2", "4", "5"],
+    "hint": "Modus is die getal wat die meeste voorkom."
+  }
+]

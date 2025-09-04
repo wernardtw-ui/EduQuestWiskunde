@@ -1,19 +1,20 @@
-{
-  "term": "Term 3",
-  "topics": [
-    {
-      "name": "Lineêre Vergelykings",
-      "questions": [
-        {
-          "text": "Los op: 2x - 7 = 9",
-          "steps": [
-            { "text": "2x = 9 + 7", "hint": "Skuif die -7 oor" },
-            { "text": "2x = 16", "hint": "Tel 9 en 7 saam" },
-            { "text": "x = 8", "hint": "Deel albei kante deur 2" }
-          ],
-          "distractors": ["x = 2", "x = 7", "x = 9"]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "text": "Los op: 9x = 81. Wat is x?",
+    "solution": ["9"],
+    "distractors": ["8", "10", "7"],
+    "hint": "Deel beide kante deur 9."
+  },
+  {
+    "text": "Wat is die kwadraat van 6?",
+    "solution": ["36"],
+    "distractors": ["12", "18", "30"],
+    "hint": "Kwadraat beteken 6 × 6."
+  },
+  {
+    "text": "Wat is die gemiddelde van 4, 6, 8?",
+    "solution": ["6"],
+    "distractors": ["5", "7", "8"],
+    "hint": "Som die getalle op en deel deur die hoeveelheid getalle."
+  }
+]
