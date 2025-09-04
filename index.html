@@ -5,18 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EduQuestWiskunde – Graad 9 SA</title>
   <link rel="stylesheet" href="style.css?v=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #1f2937; }
+    button { margin: 5px; padding: 8px 12px; border-radius: 8px; border: none; background: #3b82f6; color: white; cursor: pointer; }
+    button:hover { background: #2563eb; }
+    #topics { margin: 20px 0; }
+    #game-area { margin-top: 20px; }
+    .drop-slot { border: 2px dashed #9ca3af; padding: 8px 12px; min-width: 120px; min-height: 24px; }
+    .option { background: #f3f4f6; margin: 5px; padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px; cursor: grab; display: inline-block; }
+    .option.dragging { opacity: 0.5; }
+  </style>
 </head>
 <body>
   <h1>Welkom by EduQuestWiskunde</h1>
 
-  <!-- Example buttons to load terms -->
-  <button onclick="loadTerm('term1.json')">Laai Term 1</button>
-  <button onclick="loadTerm('term2.json')">Laai Term 2</button>
+  <!-- Term buttons -->
+  <button onclick="loadTerm('term1')">Laai Term 1</button>
+  <button onclick="loadTerm('term2')">Laai Term 2</button>
 
-  <!-- Load the script with cache-busting -->
+  <!-- Topic selection -->
+  <div id="topics"></div>
+
+  <!-- Game area -->
+  <div id="game-area" style="display:none;">
+    <p id="questionText"></p>
+    <div id="slots"></div>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Volgende Vraag</button>
+  </div>
+
+  <!-- Load script with cache-busting -->
   <script>
-    // Append a version query to prevent caching
-    const version = Date.now(); // ensures unique per page load
+    const version = Date.now(); // unique number every load
     const script = document.createElement("script");
     script.src = "script.js?v=" + version;
     document.body.appendChild(script);

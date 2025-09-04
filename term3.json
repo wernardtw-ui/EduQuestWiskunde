@@ -1,0 +1,19 @@
+{
+  "term": "Term 3",
+  "topics": [
+    {
+      "name": "Lineêre Vergelykings",
+      "questions": [
+        {
+          "text": "Los op: 2x - 7 = 9",
+          "steps": [
+            { "text": "2x = 9 + 7", "hint": "Skuif die -7 oor" },
+            { "text": "2x = 16", "hint": "Tel 9 en 7 saam" },
+            { "text": "x = 8", "hint": "Deel albei kante deur 2" }
+          ],
+          "distractors": ["x = 2", "x = 7", "x = 9"]
+        }
+      ]
+    }
+  ]
+}

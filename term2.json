@@ -1,0 +1,19 @@
+{
+  "term": "Term 2",
+  "topics": [
+    {
+      "name": "Breuke & Desimale",
+      "questions": [
+        {
+          "text": "Vereenvoudig: 12/18",
+          "steps": [
+            { "text": "Deel teller en noemer deur 6", "hint": "Soek die grootste gemene deler" },
+            { "text": "12 ÷ 6 = 2 en 18 ÷ 6 = 3", "hint": "Bereken beide kante" },
+            { "text": "Antwoord = 2/3", "hint": "Finale vereenvoudigde breuk" }
+          ],
+          "distractors": ["6/9", "4/9", "3/5"]
+        }
+      ]
+    }
+  ]
+}

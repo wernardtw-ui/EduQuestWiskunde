@@ -14,15 +14,17 @@
           "distractors": ["x = 15", "x = 25", "x = 3"]
         }
       ]
-    }
-  ]
-},
+    },
     {
       "name": "Meetkunde",
       "questions": [
         {
           "text": "Bereken die oppervlakte van 'n driehoek met basis 10 cm en hoogte 5 cm.",
-          "steps": ["Oppervlakte = 1/2 × basis × hoogte", "Oppervlakte = 1/2 × 10 × 5", "Oppervlakte = 25 cm²"],
+          "steps": [
+            { "text": "Oppervlakte = 1/2 × basis × hoogte", "hint": "Formule vir driehoek se oppervlakte" },
+            { "text": "Oppervlakte = 1/2 × 10 × 5", "hint": "Vervang basis = 10 en hoogte = 5" },
+            { "text": "Oppervlakte = 25 cm²", "hint": "Bereken 1/2 × 10 × 5" }
+          ],
           "distractors": ["50 cm²", "30 cm²", "15 cm²"]
         }
       ]
