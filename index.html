@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduQuestWiskunde – Graad 9 SA</title>
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <h1>Welkom by EduQuestWiskunde</h1>
+
+  <!-- Example buttons to load terms -->
+  <button onclick="loadTerm('term1.json')">Laai Term 1</button>
+  <button onclick="loadTerm('term2.json')">Laai Term 2</button>
+
+  <!-- Load the script with cache-busting -->
+  <script>
+    // Append a version query to prevent caching
+    const version = Date.now(); // ensures unique per page load
+    const script = document.createElement("script");
+    script.src = "script.js?v=" + version;
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
