@@ -4,7 +4,7 @@ let currentQuestionIndex = 0;
 
 // Load a term (term1, term2, etc.)
 function loadTerm(term) {
-    fetch(`/${term}.json`)
+    fetch(`${term}.json`)
         .then(response => response.json())
         .then(data => {
             currentTerm = term;
@@ -15,7 +15,7 @@ function loadTerm(term) {
         })
         .catch(err => {
             console.error("Error loading term:", err);
-            alert("Kon nie die vrae laai nie. Maak seker data/" + term + ".json bestaan.");
+            alert("Kon nie die vrae laai nie. Maak seker " + term + ".json bestaan.");
         });
 }
 
@@ -26,7 +26,6 @@ function showQuestion() {
     const slotsDiv = document.getElementById('slots');
     const optionsDiv = document.getElementById('options');
 
-    // Show question
     questionText.innerHTML = q.text;
 
     // Clear slots & options
@@ -82,12 +81,17 @@ function drop(e) {
     const correctAnswer = q.solution[slotIndex];
 
     if (draggedItem.innerText === correctAnswer) {
+        // ✅ Correct animation
         e.target.innerText = draggedItem.innerText;
         e.target.classList.add('filled');
+        e.target.classList.add('correct');
+        setTimeout(() => e.target.classList.remove('correct'), 800);
         draggedItem.style.display = 'none';
         checkAllSlotsFilled();
     } else {
-        alert("Fout! Probeer weer.");
+        // ❌ Incorrect animation
+        draggedItem.classList.add('shake');
+        setTimeout(() => draggedItem.classList.remove('shake'), 500);
     }
 }
 

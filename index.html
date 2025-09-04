@@ -146,6 +146,33 @@
 </head>
 <body>
   <h1>Welkom by EduQuestWiskunde 🎉</h1>
+/* Correct slot lights green */
+.drop-slot.correct {
+    animation: correctFlash 0.8s ease;
+    background-color: #c8e6c9 !important;
+    border-color: #2ecc71 !important;
+}
+
+/* Incorrect option shakes */
+.option.shake {
+    animation: shake 0.5s;
+}
+
+/* Keyframes for correct */
+@keyframes correctFlash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); background-color: #2ecc71; }
+    100% { transform: scale(1); background-color: #f1f2f6; }
+}
+
+/* Keyframes for shake */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
 
   <!-- Term buttons -->
   <button class="btn btn-term1" onclick="loadTerm('term1')">📘 Laai Term 1</button>
