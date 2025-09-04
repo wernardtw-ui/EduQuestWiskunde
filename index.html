@@ -5,25 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EduQuestWiskunde – Graad 9 SA</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #1f2937; }
-    button { margin: 5px; padding: 8px 12px; border-radius: 8px; border: none; background: #3b82f6; color: white; cursor: pointer; }
-    button:hover { background: #2563eb; }
-    #topics { margin: 20px 0; }
-    #game-area { margin-top: 20px; }
-    .drop-slot { border: 2px dashed #9ca3af; padding: 8px 12px; min-width: 120px; min-height: 24px; }
-    .option { background: #f3f4f6; margin: 5px; padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px; cursor: grab; display: inline-block; }
+    body {
+      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #1f2937;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ffffff;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      margin: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .btn-term1 { background: #ff6b6b; }
+    .btn-term2 { background: #48dbfb; }
+    .btn-term3 { background: #1dd1a1; }
+    .btn-term4 { background: #feca57; }
+
+    #topics {
+      margin: 20px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    #topics button {
+      background: #5f27cd;
+      color: white;
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    #game-area {
+      margin-top: 30px;
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #questionText {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    #slots {
+      margin: 15px 0;
+    }
+    .drop-slot {
+      border: 2px dashed #999;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 10px;
+      min-width: 140px;
+      min-height: 30px;
+      display: inline-block;
+      background: #f1f2f6;
+    }
+    .drop-slot.filled {
+      background: #c8e6c9;
+      border: 2px solid #2ecc71;
+    }
+
+    #options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .option {
+      background: #ffdd59;
+      color: #333;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: grab;
+      border: 2px solid #ffa801;
+      transition: transform 0.2s ease;
+    }
+    .option:hover {
+      transform: scale(1.1);
+      background: #ffc048;
+    }
     .option.dragging { opacity: 0.5; }
+
+    .hint-btn {
+      background: #ff6b81;
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-left: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .hint-btn:hover { background: #e55039; }
+
+    .next-btn {
+      margin-top: 20px;
+      background: #10ac84;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .next-btn:hover {
+      transform: scale(1.05);
+      background: #1dd1a1;
+    }
   </style>
 </head>
 <body>
-  <h1>Welkom by EduQuestWiskunde</h1>
+  <h1>Welkom by EduQuestWiskunde 🎉</h1>
 
   <!-- Term buttons -->
- <button onclick="loadTerm('term1')">Laai Term 1</button>
-<button onclick="loadTerm('term2')">Laai Term 2</button>
-<button onclick="loadTerm('term3')">Laai Term 3</button>
-<button onclick="loadTerm('term4')">Laai Term 4</button>
+  <button class="btn btn-term1" onclick="loadTerm('term1')">📘 Laai Term 1</button>
+  <button class="btn btn-term2" onclick="loadTerm('term2')">📗 Laai Term 2</button>
+  <button class="btn btn-term3" onclick="loadTerm('term3')">📕 Laai Term 3</button>
+  <button class="btn btn-term4" onclick="loadTerm('term4')">📙 Laai Term 4</button>
 
   <!-- Topic selection -->
   <div id="topics"></div>
@@ -33,12 +161,12 @@
     <p id="questionText"></p>
     <div id="slots"></div>
     <div id="options"></div>
-    <button onclick="nextQuestion()">Volgende Vraag</button>
+    <button class="next-btn" onclick="nextQuestion()">➡️ Volgende Vraag</button>
   </div>
 
   <!-- Load script with cache-busting -->
   <script>
-    const version = Date.now(); // unique number every load
+    const version = Date.now();
     const script = document.createElement("script");
     script.src = "script.js?v=" + version;
     document.body.appendChild(script);

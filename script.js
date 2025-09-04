@@ -1,103 +1,121 @@
+let currentTerm = null;
 let questions = [];
-let currentTopic = null;
 let currentQuestionIndex = 0;
 
+// Load a term (term1, term2, etc.)
 function loadTerm(term) {
-  const version = Date.now(); // unique number each load
-  fetch(`data/${term}.json?v=${version}`)
-    .then(res => res.json())
-    .then(data => {
-      const topicList = document.getElementById("topics");
-      topicList.innerHTML = "";
-      document.getElementById("game-area").style.display = "none";
-
-      data.topics.forEach(topic => {
-        const btn = document.createElement("button");
-        btn.textContent = topic.name;
-        btn.onclick = () => {
-          currentTopic = topic;
-          currentQuestionIndex = 0;
-          showQuestion();
-        };
-        topicList.appendChild(btn);
-      });
-    })
-    .catch(err => console.error("Error loading term:", err));
+    fetch(`data/${term}.json`)
+        .then(response => response.json())
+        .then(data => {
+            currentTerm = term;
+            questions = data;
+            currentQuestionIndex = 0;
+            document.getElementById('game-area').style.display = 'block';
+            showQuestion();
+        })
+        .catch(err => {
+            console.error("Error loading term:", err);
+            alert("Kon nie die vrae laai nie. Maak seker data/" + term + ".json bestaan.");
+        });
 }
 
+// Show current question
 function showQuestion() {
-  const gameArea = document.getElementById("game-area");
-  gameArea.style.display = "block";
+    const q = questions[currentQuestionIndex];
+    const questionText = document.getElementById('questionText');
+    const slotsDiv = document.getElementById('slots');
+    const optionsDiv = document.getElementById('options');
 
-  const question = currentTopic.questions[currentQuestionIndex];
-  document.getElementById("questionText").textContent = question.text;
+    // Show question
+    questionText.innerHTML = q.text;
 
-  const slots = document.getElementById("slots");
-  const options = document.getElementById("options");
-  slots.innerHTML = "";
-  options.innerHTML = "";
+    // Clear slots & options
+    slotsDiv.innerHTML = '';
+    optionsDiv.innerHTML = '';
 
-  // Create drop slots (with IDs and hint buttons)
-  question.steps.forEach((step, i) => {
-    const slotWrapper = document.createElement("div");
-    slotWrapper.style.display = "flex";
-    slotWrapper.style.alignItems = "center";
-    slotWrapper.style.gap = "10px";
-
-    const slot = document.createElement("div");
-    slot.className = "drop-slot";
-    slot.id = `slotStep${i + 1}`;
-    slot.dataset.correct = step.text;
-    slot.ondragover = e => e.preventDefault();
-    slot.ondrop = e => handleDrop(e, slot);
-
-    const hintBtn = document.createElement("button");
-    hintBtn.textContent = "Hint";
-    hintBtn.style.background = "#f59e0b";
-    hintBtn.style.marginTop = "0";
-    hintBtn.onclick = () => alert(step.hint);
-
-    slotWrapper.appendChild(slot);
-    slotWrapper.appendChild(hintBtn);
-    slots.appendChild(slotWrapper);
-  });
-
-  // Shuffle options (steps + distractors)
-  let choices = [...question.steps.map(s => s.text), ...question.distractors];
-  choices = choices.sort(() => Math.random() - 0.5);
-
-  choices.forEach(choice => {
-    const div = document.createElement("div");
-    div.className = "option";
-    div.textContent = choice;
-    div.draggable = true;
-    div.ondragstart = e => {
-      div.classList.add("dragging");
-      e.dataTransfer.setData("text/plain", choice);
-    };
-    div.ondragend = () => div.classList.remove("dragging");
-    options.appendChild(div);
-  });
-}
-
-function handleDrop(e, slot) {
-  e.preventDefault();
-  const draggedText = e.dataTransfer.getData("text/plain");
-
-  if (draggedText === slot.dataset.correct && !slot.classList.contains("filled")) {
-    slot.textContent = draggedText;
-    slot.classList.add("filled");
-    document.querySelectorAll(".option").forEach(opt => {
-      if (opt.textContent === draggedText) opt.remove();
+    // Create slots
+    q.solution.forEach((_, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'drop-slot';
+        slot.dataset.index = i;
+        slot.addEventListener('dragover', allowDrop);
+        slot.addEventListener('drop', drop);
+        slotsDiv.appendChild(slot);
     });
-  }
+
+    // Create options (shuffled)
+    const shuffledOptions = shuffleArray([...q.solution, ...q.distractors]);
+    shuffledOptions.forEach(optionText => {
+        const option = document.createElement('div');
+        option.className = 'option';
+        option.draggable = true;
+        option.innerText = optionText;
+        option.addEventListener('dragstart', dragStart);
+        optionsDiv.appendChild(option);
+    });
+
+    // Add hint button if available
+    if (q.hint) {
+        const hintBtn = document.createElement('button');
+        hintBtn.className = 'hint-btn';
+        hintBtn.innerText = '💡 Hint';
+        hintBtn.onclick = () => alert(q.hint);
+        questionText.appendChild(hintBtn);
+    }
 }
 
+// Drag-and-drop functions
+let draggedItem = null;
+
+function dragStart(e) {
+    draggedItem = e.target;
+}
+
+function allowDrop(e) {
+    e.preventDefault();
+}
+
+function drop(e) {
+    e.preventDefault();
+    const slotIndex = e.target.dataset.index;
+    const q = questions[currentQuestionIndex];
+    const correctAnswer = q.solution[slotIndex];
+
+    if (draggedItem.innerText === correctAnswer) {
+        e.target.innerText = draggedItem.innerText;
+        e.target.classList.add('filled');
+        draggedItem.style.display = 'none';
+        checkAllSlotsFilled();
+    } else {
+        alert("Fout! Probeer weer.");
+    }
+}
+
+// Check if all slots filled correctly
+function checkAllSlotsFilled() {
+    const slots = document.querySelectorAll('.drop-slot');
+    const allFilled = Array.from(slots).every(slot => slot.classList.contains('filled'));
+    if (allFilled) {
+        alert("👍 Goed gedaan! Klik Volgende Vraag om voort te gaan.");
+    }
+}
+
+// Next question
 function nextQuestion() {
-  if (currentQuestionIndex < currentTopic.questions.length - 1) {
-    currentQuestionIndex++;
-    showQuestion();
-  } else {
-    alert("Jy het al die vrae in hierdie onderwerp voltooi!");
-  }
+    if (!currentTerm) return;
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion();
+    } else {
+        alert("Jy het al die vrae voltooi! 🎉");
+    }
+}
+
+// Utility: shuffle array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
