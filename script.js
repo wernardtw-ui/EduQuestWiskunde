@@ -4,7 +4,7 @@ let currentQuestionIndex = 0;
 
 // Load a term (term1, term2, etc.)
 function loadTerm(term) {
-    fetch(`data/${term}.json`)
+    fetch(`/${term}.json`)
         .then(response => response.json())
         .then(data => {
             currentTerm = term;
