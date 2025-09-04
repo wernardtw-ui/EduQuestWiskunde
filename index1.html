@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>EduQuest Wiskunde – Graad 9</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9fafb; margin: 0; padding: 20px; }
+    h1 { text-align: center; color: #1f2937; margin-bottom: 20px; }
+    .menu { margin: 10px 0; display: flex; gap: 10px; justify-content: center; }
+    .question-box { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 20px auto; max-width: 700px; }
+    .drag-area { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+    .drop-slot { border: 2px dashed #cbd5e1; border-radius: 8px; min-height: 40px; padding: 10px; text-align: center; background: #f1f5f9; }
+    .drop-slot.filled { border: 2px solid #22c55e; background: #dcfce7; }
+    .options { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .option { background: #3b82f6; color: white; padding: 10px 15px; border-radius: 8px; cursor: grab; }
+    .option.dragging { opacity: 0.5; }
+    button { margin-top: 20px; padding: 10px 15px; border: none; border-radius: 8px; background: #22c55e; color: white; font-size: 16px; cursor: pointer; }
+    button:hover { background: #16a34a; }
+  </style>
+</head>
+<body>
+  <h1>EduQuest Wiskunde – Graad 9</h1>
+
+  <div class="menu">
+    <button onclick="loadTerm('term1')">Term 1</button>
+    <!-- later Term 2, 3, 4 -->
+  </div>
+
+  <div id="topics" class="menu"></div>
+
+  <div id="game-area" class="question-box" style="display:none;">
+    <h2 id="questionText"></h2>
+    <div id="slots" class="drag-area"></div>
+    <div id="options" class="options"></div>
+    <button id="nextBtn" onclick="nextQuestion()">Volgende Vraag</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
