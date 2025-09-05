@@ -1,269 +1,1467 @@
 {
-  "Algebra": [
-    {
-      "text": "Los op: 2x + 5 = 11",
-      "steps": [
-        "2x = 11 - 5",
-        "2x = 6",
-        "x = 6 ÷ 2",
-        "x = 3"
-      ],
-      "solution": ["3"],
-      "distractors": [
-        "2x = 11 + 5 (verkeerde teken)", 
-        "x = 11 ÷ 2 = 5.5", 
-        "x = 6 × 2 = 12"
-      ],
-      "hint": "Eerstel uitsonder by, dan deel deur koëffisiënt."
-    },
-    {
-      "text": "Los op: 5x - 7 = 18",
-      "steps": [
-        "5x = 18 + 7",
-        "5x = 25",
-        "x = 25 ÷ 5",
-        "x = 5"
-      ],
-      "solution": ["5"],
-      "distractors": [
-        "5x = 18 - 7 = 11", 
-        "x = 18 ÷ 5 = 3.6",
-        "x = 25 × 5 = 125"
-      ],
-      "hint": "Voeg 7 by beide kante van die vergelyking."
-    },
-    {
-      "text": "Los op: 3(x + 4) = 15",
-      "steps": [
-        "3x + 12 = 15",
-        "3x = 15 - 12",
-        "3x = 3",
-        "x = 1"
-      ],
-      "solution": ["1"],
-      "distractors": [
-        "3x = 15 + 12 = 27",
-        "x = 15 ÷ 3 = 5", 
-        "x = 3 × 3 = 9"
-      ],
-      "hint": "Maak eers die hakies oop en vereenvoudig."
-    },
-    {
-      "text": "Los op: 4x/2 = 10",
-      "steps": [
-        "2x = 10",
-        "x = 10 ÷ 2",
-        "x = 5"
-      ],
-      "solution": ["5"],
-      "distractors": [
-        "x = 10 × 2 = 20",
-        "2x = 10 ÷ 2 = 5",
-        "x = 10 + 2 = 12"
-      ],
-      "hint": "Vermenigvuldig en deel stap-vir-stap."
-    },
-    {
-      "text": "Los op: x/3 + 4 = 7",
-      "steps": [
-        "x/3 = 7 - 4",
-        "x/3 = 3",
-        "x = 3 × 3",
-        "x = 9"
-      ],
-      "solution": ["9"],
-      "distractors": [
-        "x = 3 ÷ 3 = 1",
-        "x = 7 + 4 = 11",
-        "x = 3 + 3 = 6"
-      ],
-      "hint": "Trek 4 af en vermenigvuldig deur 3."
-    },
-    {
-      "text": "Los op: 6x - 9 = 3x + 12",
-      "steps": [
-        "6x - 3x = 12 + 9",
-        "3x = 21",
-        "x = 21 ÷ 3",
-        "x = 7"
-      ],
-      "solution": ["7"],
-      "distractors": [
-        "6x + 3x = 21 → x = 21/9",
-        "x = 3 ÷ 3 = 1",
-        "3x = 12 - 9 = 3 → x =1"
-      ],
-      "hint": "Bring x-terme na een kant, getalle na die ander."
-    },
-    {
-      "text": "Los op: 2(x - 3) + 5 = 11",
-      "steps": [
-        "2x - 6 + 5 = 11",
-        "2x -1 = 11",
-        "2x = 12",
-        "x = 6"
-      ],
-      "solution": ["6"],
-      "distractors": [
-        "2x -6 -5 = 11 → 2x = 22 → x=11",
-        "x = 12 ÷ 2 = 6", 
-        "x = 11 - 2 = 9"
-      ],
-      "hint": "Maak eers die hakies oop en vereenvoudig."
-    },
-    {
-      "text": "Los op: 3x + 2 = 2x + 7",
-      "steps": [
-        "3x - 2x = 7 - 2",
-        "x = 5"
-      ],
-      "solution": ["5"],
-      "distractors": [
-        "x = 7 + 2 = 9",
-        "x = 2 ÷ 3 ≈0.667",
-        "x = 5 ÷ 2 = 2.5"
-      ],
-      "hint": "Bring x-terme bymekaar, los vir x."
-    },
-    {
-      "text": "Los op: 5(x + 2) = 25",
-      "steps": [
-        "5x + 10 = 25",
-        "5x = 15",
-        "x = 3"
-      ],
-      "solution": ["3"],
-      "distractors": [
-        "5x = 25 + 10 = 35 → x=7",
-        "x = 25 ÷ 5 = 5",
-        "x = 15 × 5 = 75"
-      ],
-      "hint": "Maak hakies oop, trek dan 10 af."
-    },
-    {
-      "text": "Los op: 2x - 3 = x + 4",
-      "steps": [
-        "2x - x = 4 + 3",
-        "x = 7"
-      ],
-      "solution": ["7"],
-      "distractors": [
-        "x = 2 - 3 = -1",
-        "x = 4 - 2 = 2",
-        "x = 7 ÷ 2 = 3.5"
-      ],
-      "hint": "Bring x-terme na een kant en los vir x."
-    }
-  ],
-  "Statistics": [
-    {
-      "text": "Vind die gemiddelde van: 5, 10, 15, 20",
-      "steps": [
-        "Som: 5+10+15+20=50",
-        "Aantal getalle = 4",
-        "Gemiddelde = 50 ÷ 4",
-        "Gemiddelde = 12.5"
-      ],
-      "solution": ["12.5"],
-      "distractors": [
-        "Som ÷ 5 = 10", 
-        "Som ÷ 3 ≈16.67", 
-        "Som ÷ 6 ≈8.33"
-      ],
-      "hint": "Som alle getalle en deel deur totaal aantal."
-    },
-    {
-      "text": "Vind die mediaan van: 7, 3, 5, 9, 11",
-      "steps": [
-        "Rangskik van klein na groot: 3,5,7,9,11",
-        "Mediaan = middelste getal = 7"
-      ],
-      "solution": ["7"],
-      "distractors": ["5","9","6"],
-      "hint": "Rangskik getalle en kies middelste."
-    },
-    {
-      "text": "Vind die modus van: 2,4,4,5,6",
-      "steps": [
-        "Kyk watter getal die meeste keer voorkom",
-        "Modus = 4"
-      ],
-      "solution": ["4"],
-      "distractors": ["2","5","6"],
-      "hint": "Modus is die mees voorkomende getal."
-    },
-    {
-      "text": "Vind die gemiddelde van: 3, 6, 9, 12, 15",
-      "steps": [
-        "Som = 3+6+9+12+15=45",
-        "Aantal getalle =5",
-        "Gemiddelde = 45 ÷5 = 9"
-      ],
-      "solution": ["9"],
-      "distractors": ["8","10","12"],
-      "hint": "Som en deel deur aantal getalle."
-    },
-    {
-      "text": "Vind die mediaan van: 2, 5, 1, 4, 3",
-      "steps": [
-        "Rangskik:1,2,3,4,5",
-        "Mediaan =3"
-      ],
-      "solution": ["3"],
-      "distractors": ["2","4","5"],
-      "hint": "Rangskik en kies middelste."
-    },
-    {
-      "text": "Vind die modus van:1,2,2,3,2",
-      "steps": [
-        "Kyk watter getal die meeste keer voorkom",
-        "Modus =2"
-      ],
-      "solution": ["2"],
-      "distractors": ["1","3","4"],
-      "hint": "Modus is die mees voorkomende getal."
-    },
-    {
-      "text": "Vind die gemiddelde van: 4,8,6,10",
-      "steps": [
-        "Som =4+8+6+10=28",
-        "Aantal =4",
-        "Gemiddelde = 28 ÷4 =7"
-      ],
-      "solution": ["7"],
-      "distractors": ["6","8","5"],
-      "hint": "Som en deel deur aantal getalle."
-    },
-    {
-      "text": "Vind die mediaan van: 9, 5, 7, 11, 13",
-      "steps": [
-        "Rangskik: 5,7,9,11,13",
-        "Mediaan = 9"
-      ],
-      "solution": ["9"],
-      "distractors": ["7","11","10"],
-      "hint": "Rangskik en kies middelste."
-    },
-    {
-      "text": "Vind die modus van: 3,3,4,4,4,5",
-      "steps": [
-        "Kyk watter getal die meeste keer voorkom",
-        "Modus = 4"
-      ],
-      "solution": ["4"],
-      "distractors": ["3","5","2"],
-      "hint": "Modus is die mees voorkomende getal."
-    },
-    {
-      "text": "Vind die gemiddelde van: 6, 12, 18",
-      "steps": [
-        "Som = 6+12+18=36",
-        "Aantal =3",
-        "Gemiddelde =36 ÷3=12"
-      ],
-      "solution": ["12"],
-      "distractors": ["11","13","10"],
-      "hint": "Som en deel deur aantal getalle."
-    }
-  ]
+    "Algebra": [
+        {
+            "text": "Los op: 2x + 5 = 11",
+            "steps": [
+                "2x = 11 - 5",
+                "2x = 6",
+                "x = 6 ÷ 2",
+                "x = 3"
+            ],
+            "solution": [
+                "3"
+            ],
+            "distractors": [
+                "2x = 11 + 5 (verkeerde teken)",
+                "x = 11 ÷ 2 = 5.5",
+                "x = 6 × 2 = 12"
+            ],
+            "hint": "Eerstel uitsonder by, dan deel deur koëffisiënt."
+        },
+        {
+            "text": "Los op: 5x - 7 = 18",
+            "steps": [
+                "5x = 18 + 7",
+                "5x = 25",
+                "x = 25 ÷ 5",
+                "x = 5"
+            ],
+            "solution": [
+                "5"
+            ],
+            "distractors": [
+                "5x = 18 - 7 = 11",
+                "x = 18 ÷ 5 = 3.6",
+                "x = 25 × 5 = 125"
+            ],
+            "hint": "Voeg 7 by beide kante van die vergelyking."
+        },
+        {
+            "text": "Los op: 3(x + 4) = 15",
+            "steps": [
+                "3x + 12 = 15",
+                "3x = 15 - 12",
+                "3x = 3",
+                "x = 1"
+            ],
+            "solution": [
+                "1"
+            ],
+            "distractors": [
+                "3x = 15 + 12 = 27",
+                "x = 15 ÷ 3 = 5",
+                "x = 3 × 3 = 9"
+            ],
+            "hint": "Maak eers die hakies oop en vereenvoudig."
+        },
+        {
+            "text": "Los op: 4x/2 = 10",
+            "steps": [
+                "2x = 10",
+                "x = 10 ÷ 2",
+                "x = 5"
+            ],
+            "solution": [
+                "5"
+            ],
+            "distractors": [
+                "x = 10 × 2 = 20",
+                "2x = 10 ÷ 2 = 5",
+                "x = 10 + 2 = 12"
+            ],
+            "hint": "Vermenigvuldig en deel stap-vir-stap."
+        },
+        {
+            "text": "Los op: x/3 + 4 = 7",
+            "steps": [
+                "x/3 = 7 - 4",
+                "x/3 = 3",
+                "x = 3 × 3",
+                "x = 9"
+            ],
+            "solution": [
+                "9"
+            ],
+            "distractors": [
+                "x = 3 ÷ 3 = 1",
+                "x = 7 + 4 = 11",
+                "x = 3 + 3 = 6"
+            ],
+            "hint": "Trek 4 af en vermenigvuldig deur 3."
+        },
+        {
+            "text": "Los op: 6x - 9 = 3x + 12",
+            "steps": [
+                "6x - 3x = 12 + 9",
+                "3x = 21",
+                "x = 21 ÷ 3",
+                "x = 7"
+            ],
+            "solution": [
+                "7"
+            ],
+            "distractors": [
+                "6x + 3x = 21 → x = 21/9",
+                "x = 3 ÷ 3 = 1",
+                "3x = 12 - 9 = 3 → x =1"
+            ],
+            "hint": "Bring x-terme na een kant, getalle na die ander."
+        },
+        {
+            "text": "Los op: 2(x - 3) + 5 = 11",
+            "steps": [
+                "2x - 6 + 5 = 11",
+                "2x -1 = 11",
+                "2x = 12",
+                "x = 6"
+            ],
+            "solution": [
+                "6"
+            ],
+            "distractors": [
+                "2x -6 -5 = 11 → 2x = 22 → x=11",
+                "x = 12 ÷ 2 = 6",
+                "x = 11 - 2 = 9"
+            ],
+            "hint": "Maak eers die hakies oop en vereenvoudig."
+        },
+        {
+            "text": "Los op: 3x + 2 = 2x + 7",
+            "steps": [
+                "3x - 2x = 7 - 2",
+                "x = 5"
+            ],
+            "solution": [
+                "5"
+            ],
+            "distractors": [
+                "x = 7 + 2 = 9",
+                "x = 2 ÷ 3 ≈0.667",
+                "x = 5 ÷ 2 = 2.5"
+            ],
+            "hint": "Bring x-terme bymekaar, los vir x."
+        },
+        {
+            "text": "Los op: 5(x + 2) = 25",
+            "steps": [
+                "5x + 10 = 25",
+                "5x = 15",
+                "x = 3"
+            ],
+            "solution": [
+                "3"
+            ],
+            "distractors": [
+                "5x = 25 + 10 = 35 → x=7",
+                "x = 25 ÷ 5 = 5",
+                "x = 15 × 5 = 75"
+            ],
+            "hint": "Maak hakies oop, trek dan 10 af."
+        },
+        {
+            "text": "Los op: 2x - 3 = x + 4",
+            "steps": [
+                "2x - x = 4 + 3",
+                "x = 7"
+            ],
+            "solution": [
+                "7"
+            ],
+            "distractors": [
+                "x = 2 - 3 = -1",
+                "x = 4 - 2 = 2",
+                "x = 7 ÷ 2 = 3.5"
+            ],
+            "hint": "Bring x-terme na een kant en los vir x."
+        }
+    ],
+    "Datastatistiek": [
+        {
+            "text": "Vind die gemiddelde van: 5, 10, 15, 20",
+            "steps": [
+                "Som: 5+10+15+20=50",
+                "Aantal getalle = 4",
+                "Gemiddelde = 50 ÷ 4",
+                "Gemiddelde = 12.5"
+            ],
+            "solution": [
+                "12.5"
+            ],
+            "distractors": [
+                "Som ÷ 5 = 10",
+                "Som ÷ 3 ≈16.67",
+                "Som ÷ 6 ≈8.33"
+            ],
+            "hint": "Som alle getalle en deel deur totaal aantal."
+        },
+        {
+            "text": "Vind die mediaan van: 7, 3, 5, 9, 11",
+            "steps": [
+                "Rangskik van klein na groot: 3,5,7,9,11",
+                "Mediaan = middelste getal = 7"
+            ],
+            "solution": [
+                "7"
+            ],
+            "distractors": [
+                "5",
+                "9",
+                "6"
+            ],
+            "hint": "Rangskik getalle en kies middelste."
+        },
+        {
+            "text": "Vind die modus van: 2,4,4,5,6",
+            "steps": [
+                "Kyk watter getal die meeste keer voorkom",
+                "Modus = 4"
+            ],
+            "solution": [
+                "4"
+            ],
+            "distractors": [
+                "2",
+                "5",
+                "6"
+            ],
+            "hint": "Modus is die mees voorkomende getal."
+        },
+        {
+            "text": "Vind die gemiddelde van: 3, 6, 9, 12, 15",
+            "steps": [
+                "Som = 3+6+9+12+15=45",
+                "Aantal getalle =5",
+                "Gemiddelde = 45 ÷5 = 9"
+            ],
+            "solution": [
+                "9"
+            ],
+            "distractors": [
+                "8",
+                "10",
+                "12"
+            ],
+            "hint": "Som en deel deur aantal getalle."
+        },
+        {
+            "text": "Vind die mediaan van: 2, 5, 1, 4, 3",
+            "steps": [
+                "Rangskik:1,2,3,4,5",
+                "Mediaan =3"
+            ],
+            "solution": [
+                "3"
+            ],
+            "distractors": [
+                "2",
+                "4",
+                "5"
+            ],
+            "hint": "Rangskik en kies middelste."
+        },
+        {
+            "text": "Vind die modus van:1,2,2,3,2",
+            "steps": [
+                "Kyk watter getal die meeste keer voorkom",
+                "Modus =2"
+            ],
+            "solution": [
+                "2"
+            ],
+            "distractors": [
+                "1",
+                "3",
+                "4"
+            ],
+            "hint": "Modus is die mees voorkomende getal."
+        },
+        {
+            "text": "Vind die gemiddelde van: 4,8,6,10",
+            "steps": [
+                "Som =4+8+6+10=28",
+                "Aantal =4",
+                "Gemiddelde = 28 ÷4 =7"
+            ],
+            "solution": [
+                "7"
+            ],
+            "distractors": [
+                "6",
+                "8",
+                "5"
+            ],
+            "hint": "Som en deel deur aantal getalle."
+        },
+        {
+            "text": "Vind die mediaan van: 9, 5, 7, 11, 13",
+            "steps": [
+                "Rangskik: 5,7,9,11,13",
+                "Mediaan = 9"
+            ],
+            "solution": [
+                "9"
+            ],
+            "distractors": [
+                "7",
+                "11",
+                "10"
+            ],
+            "hint": "Rangskik en kies middelste."
+        },
+        {
+            "text": "Vind die modus van: 3,3,4,4,4,5",
+            "steps": [
+                "Kyk watter getal die meeste keer voorkom",
+                "Modus = 4"
+            ],
+            "solution": [
+                "4"
+            ],
+            "distractors": [
+                "3",
+                "5",
+                "2"
+            ],
+            "hint": "Modus is die mees voorkomende getal."
+        },
+        {
+            "text": "Vind die gemiddelde van: 6, 12, 18",
+            "steps": [
+                "Som = 6+12+18=36",
+                "Aantal =3",
+                "Gemiddelde =36 ÷3=12"
+            ],
+            "solution": [
+                "12"
+            ],
+            "distractors": [
+                "11",
+                "13",
+                "10"
+            ],
+            "hint": "Som en deel deur aantal getalle."
+        }
+    ],
+    "Heelgetalle": [
+        {
+            "text": "Tel die volgende: 345 + 678",
+            "steps": [
+                "345 + 678 = 1023"
+            ],
+            "solution": [
+                "1023"
+            ],
+            "distractors": [
+                "1013",
+                "1123",
+                "1003"
+            ],
+            "hint": "Voeg die honderdtalle, tientalle en eenhede bymekaar."
+        },
+        {
+            "text": "Tel af: 1000 - 567",
+            "steps": [
+                "1000 - 567 = 433"
+            ],
+            "solution": [
+                "433"
+            ],
+            "distractors": [
+                "4330",
+                "537",
+                "467"
+            ],
+            "hint": "Gebruik standaard aftrekking."
+        },
+        {
+            "text": "Vermenigvuldig: 25 × 16",
+            "steps": [
+                "25 × 16 = 400"
+            ],
+            "solution": [
+                "400"
+            ],
+            "distractors": [
+                "420",
+                "360",
+                "380"
+            ],
+            "hint": "Vermenigvuldig stap-vir-stap: 25×10 + 25×6."
+        },
+        {
+            "text": "Deel: 144 ÷ 12",
+            "steps": [
+                "144 ÷ 12 = 12"
+            ],
+            "solution": [
+                "12"
+            ],
+            "distractors": [
+                "11",
+                "14",
+                "13"
+            ],
+            "hint": "Vind hoeveel keer 12 in 144 gaan."
+        },
+        {
+            "text": "Vind die som van 234, 456 en 312",
+            "steps": [
+                "234 + 456 = 690",
+                "690 + 312 = 1002"
+            ],
+            "solution": [
+                "1002"
+            ],
+            "distractors": [
+                "1012",
+                "992",
+                "1000"
+            ],
+            "hint": "Voeg twee by twee op."
+        },
+        {
+            "text": "Tel af: 2000 - 789",
+            "steps": [
+                "2000 - 789 = 1211"
+            ],
+            "solution": [
+                "1211"
+            ],
+            "distractors": [
+                "1201",
+                "1221",
+                "1111"
+            ],
+            "hint": "Gebruik standaard aftrekking."
+        },
+        {
+            "text": "Vermenigvuldig: 36 × 14",
+            "steps": [
+                "36 × 10 = 360",
+                "36 × 4 = 144",
+                "360 + 144 = 504"
+            ],
+            "solution": [
+                "504"
+            ],
+            "distractors": [
+                "514",
+                "494",
+                "500"
+            ],
+            "hint": "Gebruik distributiewe vermenigvuldiging."
+        },
+        {
+            "text": "Deel: 525 ÷ 25",
+            "steps": [
+                "525 ÷ 25 = 21"
+            ],
+            "solution": [
+                "21"
+            ],
+            "distractors": [
+                "20",
+                "22",
+                "25"
+            ],
+            "hint": "Kyk hoeveel 25 in 525 gaan."
+        },
+        {
+            "text": "Tel: 123 + 456 + 789",
+            "steps": [
+                "123 + 456 = 579",
+                "579 + 789 = 1368"
+            ],
+            "solution": [
+                "1368"
+            ],
+            "distractors": [
+                "1358",
+                "1378",
+                "1360"
+            ],
+            "hint": "Tel twee by twee op."
+        },
+        {
+            "text": "Deel: 360 ÷ 15",
+            "steps": [
+                "360 ÷ 15 = 24"
+            ],
+            "solution": [
+                "24"
+            ],
+            "distractors": [
+                "23",
+                "25",
+                "26"
+            ],
+            "hint": "Vind hoeveel keer 15 in 360 gaan."
+        }
+    ],
+    "BreukeDesimalePersentasies": [
+        {
+            "text": "Skryf 3/4 as 'n desimale getal",
+            "steps": [
+                "3 ÷ 4 = 0.75"
+            ],
+            "solution": [
+                "0.75"
+            ],
+            "distractors": [
+                "0.7",
+                "0.8",
+                "0.65"
+            ],
+            "hint": "Deel teller deur noemer."
+        },
+        {
+            "text": "Skryf 0.6 as 'n breuk",
+            "steps": [
+                "0.6 = 6/10 = 3/5"
+            ],
+            "solution": [
+                "3/5"
+            ],
+            "distractors": [
+                "6/10",
+                "2/3",
+                "1/2"
+            ],
+            "hint": "Vereenvoudig breuk."
+        },
+        {
+            "text": "Wat is 25% van 200?",
+            "steps": [
+                "25 ÷ 100 = 0.25",
+                "0.25 × 200 = 50"
+            ],
+            "solution": [
+                "50"
+            ],
+            "distractors": [
+                "40",
+                "60",
+                "55"
+            ],
+            "hint": "Verdeel persentasie deur 100 en vermenigvuldig."
+        },
+        {
+            "text": "Skryf 7/8 as 'n desimale getal",
+            "steps": [
+                "7 ÷ 8 = 0.875"
+            ],
+            "solution": [
+                "0.875"
+            ],
+            "distractors": [
+                "0.85",
+                "0.87",
+                "0.8"
+            ],
+            "hint": "Deel teller deur noemer."
+        },
+        {
+            "text": "Wat is 15% van 80?",
+            "steps": [
+                "15 ÷ 100 = 0.15",
+                "0.15 × 80 = 12"
+            ],
+            "solution": [
+                "12"
+            ],
+            "distractors": [
+                "10",
+                "14",
+                "13"
+            ],
+            "hint": "Verdeel persentasie deur 100 en vermenigvuldig."
+        },
+        {
+            "text": "Skryf 0.45 as 'n breuk",
+            "steps": [
+                "0.45 = 45/100 = 9/20"
+            ],
+            "solution": [
+                "9/20"
+            ],
+            "distractors": [
+                "45/100",
+                "4/9",
+                "1/2"
+            ],
+            "hint": "Vereenvoudig breuk."
+        },
+        {
+            "text": "Wat is 40% van 250?",
+            "steps": [
+                "40 ÷ 100 = 0.4",
+                "0.4 × 250 = 100"
+            ],
+            "solution": [
+                "100"
+            ],
+            "distractors": [
+                "90",
+                "110",
+                "80"
+            ],
+            "hint": "Verdeel persentasie deur 100 en vermenigvuldig."
+        },
+        {
+            "text": "Skryf 5/8 as 'n desimale getal",
+            "steps": [
+                "5 ÷ 8 = 0.625"
+            ],
+            "solution": [
+                "0.625"
+            ],
+            "distractors": [
+                "0.65",
+                "0.6",
+                "0.75"
+            ],
+            "hint": "Deel teller deur noemer."
+        },
+        {
+            "text": "Skryf 0.2 as 'n persentasie",
+            "steps": [
+                "0.2 × 100 = 20%"
+            ],
+            "solution": [
+                "20%"
+            ],
+            "distractors": [
+                "2%",
+                "0.2%",
+                "25%"
+            ],
+            "hint": "Vermenigvuldig desimale met 100."
+        },
+        {
+            "text": "Wat is 10% van 500?",
+            "steps": [
+                "10 ÷ 100 = 0.1",
+                "0.1 × 500 = 50"
+            ],
+            "solution": [
+                "50"
+            ],
+            "distractors": [
+                "40",
+                "60",
+                "45"
+            ],
+            "hint": "Verdeel persentasie deur 100 en vermenigvuldig."
+        }
+    ],
+    "EksponenteWortels": [
+        {
+            "text": "Bereken: 2^3",
+            "steps": [
+                "2 × 2 × 2 = 8"
+            ],
+            "solution": [
+                "8"
+            ],
+            "distractors": [
+                "6",
+                "4",
+                "9"
+            ],
+            "hint": "Vermenigvuldig 2 drie keer."
+        },
+        {
+            "text": "Bereken: 5^2",
+            "steps": [
+                "5 × 5 = 25"
+            ],
+            "solution": [
+                "25"
+            ],
+            "distractors": [
+                "10",
+                "15",
+                "20"
+            ],
+            "hint": "Vermenigvuldig 5 met homself."
+        },
+        {
+            "text": "Bereken die wortel van 81",
+            "steps": [
+                "√81 = 9"
+            ],
+            "solution": [
+                "9"
+            ],
+            "distractors": [
+                "8",
+                "7",
+                "6"
+            ],
+            "hint": "Watter getal vermenigvuldig met homself gee 81?"
+        },
+        {
+            "text": "Bereken: 10^0",
+            "steps": [
+                "Enige getal tot die mag 0 = 1"
+            ],
+            "solution": [
+                "1"
+            ],
+            "distractors": [
+                "0",
+                "10",
+                "-1"
+            ],
+            "hint": "Onthou die magreël: x^0 = 1"
+        },
+        {
+            "text": "Bereken: 3^4",
+            "steps": [
+                "3 × 3 × 3 × 3 = 81"
+            ],
+            "solution": [
+                "81"
+            ],
+            "distractors": [
+                "64",
+                "27",
+                "72"
+            ],
+            "hint": "Vermenigvuldig 3 vier keer."
+        },
+        {
+            "text": "Bereken die wortel van 49",
+            "steps": [
+                "√49 = 7"
+            ],
+            "solution": [
+                "7"
+            ],
+            "distractors": [
+                "6",
+                "8",
+                "9"
+            ],
+            "hint": "Watter getal vermenigvuldig met homself gee 49?"
+        },
+        {
+            "text": "Bereken: 4^3",
+            "steps": [
+                "4 × 4 × 4 = 64"
+            ],
+            "solution": [
+                "64"
+            ],
+            "distractors": [
+                "48",
+                "16",
+                "32"
+            ],
+            "hint": "Vermenigvuldig 4 drie keer."
+        },
+        {
+            "text": "Bereken die wortel van 100",
+            "steps": [
+                "√100 = 10"
+            ],
+            "solution": [
+                "10"
+            ],
+            "distractors": [
+                "5",
+                "20",
+                "15"
+            ],
+            "hint": "Watter getal vermenigvuldig met homself gee 100?"
+        },
+        {
+            "text": "Bereken: 2^5",
+            "steps": [
+                "2 × 2 × 2 × 2 × 2 = 32"
+            ],
+            "solution": [
+                "32"
+            ],
+            "distractors": [
+                "16",
+                "64",
+                "30"
+            ],
+            "hint": "Vermenigvuldig 2 vyf keer."
+        },
+        {
+            "text": "Bereken: √64",
+            "steps": [
+                "√64 = 8"
+            ],
+            "solution": [
+                "8"
+            ],
+            "distractors": [
+                "6",
+                "7",
+                "9"
+            ],
+            "hint": "Watter getal vermenigvuldig met homself gee 64?"
+        }
+    ],
+    "VereenvoudigUitdrukkings": [
+        {
+            "text": "Vereenvoudig: 3x + 5x",
+            "steps": [
+                "3x + 5x = 8x"
+            ],
+            "solution": [
+                "8x"
+            ],
+            "distractors": [
+                "15x",
+                "2x",
+                "5x"
+            ],
+            "hint": "Tel gelyke terme bymekaar."
+        },
+        {
+            "text": "Vereenvoudig: 7y - 2y",
+            "steps": [
+                "7y - 2y = 5y"
+            ],
+            "solution": [
+                "5y"
+            ],
+            "distractors": [
+                "9y",
+                "3y",
+                "2y"
+            ],
+            "hint": "Tel of trek die koëffisiënte af."
+        },
+        {
+            "text": "Vereenvoudig: 4a + 3b + 2a",
+            "steps": [
+                "4a + 2a + 3b = 6a + 3b"
+            ],
+            "solution": [
+                "6a + 3b"
+            ],
+            "distractors": [
+                "4a + 5b",
+                "6a + 2b",
+                "5a + 3b"
+            ],
+            "hint": "Tel net die gelyke terme."
+        },
+        {
+            "text": "Vereenvoudig: 8x - 3x + 2",
+            "steps": [
+                "8x - 3x + 2 = 5x + 2"
+            ],
+            "solution": [
+                "5x + 2"
+            ],
+            "distractors": [
+                "11x + 2",
+                "5x - 2",
+                "3x + 2"
+            ],
+            "hint": "Tel of trek gelyke terme af."
+        },
+        {
+            "text": "Vereenvoudig: 2(m + 3)",
+            "steps": [
+                "2 × m + 2 × 3 = 2m + 6"
+            ],
+            "solution": [
+                "2m + 6"
+            ],
+            "distractors": [
+                "2m + 3",
+                "m + 6",
+                "m + 3"
+            ],
+            "hint": "Vermenigvuldig alles binne die hakies."
+        },
+        {
+            "text": "Vereenvoudig: 5(p - 2) + 3p",
+            "steps": [
+                "5p - 10 + 3p = 8p - 10"
+            ],
+            "solution": [
+                "8p - 10"
+            ],
+            "distractors": [
+                "8p + 10",
+                "5p - 3p",
+                "3p - 10"
+            ],
+            "hint": "Maak hakies oop en tel gelyke terme."
+        },
+        {
+            "text": "Vereenvoudig: x + x + x",
+            "steps": [
+                "x + x + x = 3x"
+            ],
+            "solution": [
+                "3x"
+            ],
+            "distractors": [
+                "x^3",
+                "x + 3",
+                "x2"
+            ],
+            "hint": "Tel die gelyke terme."
+        },
+        {
+            "text": "Vereenvoudig: 2a + 4b - a",
+            "steps": [
+                "2a - a + 4b = a + 4b"
+            ],
+            "solution": [
+                "a + 4b"
+            ],
+            "distractors": [
+                "2a + 4b",
+                "a + 2b",
+                "3a + 4b"
+            ],
+            "hint": "Tel of trek gelyke terme af."
+        },
+        {
+            "text": "Vereenvoudig: 3(x + 2) - x",
+            "steps": [
+                "3x + 6 - x = 2x + 6"
+            ],
+            "solution": [
+                "2x + 6"
+            ],
+            "distractors": [
+                "3x + 2",
+                "2x + 2",
+                "x + 6"
+            ],
+            "hint": "Maak hakies oop en tel gelyke terme."
+        },
+        {
+            "text": "Vereenvoudig: 4y + 2 - 3y + 5",
+            "steps": [
+                "4y - 3y + 2 + 5 = y + 7"
+            ],
+            "solution": [
+                "y + 7"
+            ],
+            "distractors": [
+                "7y",
+                "y + 5",
+                "3y + 7"
+            ],
+            "hint": "Tel gelyke terme en nommers afsonderlik."
+        }
+    ],
+    "AlgebraieseNotasie": [
+        {
+            "text": "Wat is die koëffisiënt van x in 5x + 3?",
+            "steps": [
+                "Koëffisiënt = 5"
+            ],
+            "solution": [
+                "5"
+            ],
+            "distractors": [
+                "3",
+                "8",
+                "1"
+            ],
+            "hint": "Koëffisiënt is die getal voor die veranderlike."
+        },
+        {
+            "text": "Identifiseer die veranderlike in 7y - 2",
+            "steps": [
+                "Veranderlike = y"
+            ],
+            "solution": [
+                "y"
+            ],
+            "distractors": [
+                "7",
+                "-2",
+                "0"
+            ],
+            "hint": "Veranderlike is die onbekende letter."
+        },
+        {
+            "text": "Wat is die konstante in 3x + 4?",
+            "steps": [
+                "Konstante = 4"
+            ],
+            "solution": [
+                "4"
+            ],
+            "distractors": [
+                "3",
+                "x",
+                "7"
+            ],
+            "hint": "Konstante is die nommer sonder veranderlike."
+        },
+        {
+            "text": "Skryf 6 + 2a in standaard vorm",
+            "steps": [
+                "Standaard vorm: 2a + 6"
+            ],
+            "solution": [
+                "2a + 6"
+            ],
+            "distractors": [
+                "6 + 2a",
+                "8a",
+                "2 + 6a"
+            ],
+            "hint": "Skryf veranderlike eers, konstante laastens."
+        },
+        {
+            "text": "Identifiseer koëffisiënt en konstante in 4x - 5",
+            "steps": [
+                "Koëffisiënt = 4",
+                "Konstante = -5"
+            ],
+            "solution": [
+                "4",
+                "-5"
+            ],
+            "distractors": [
+                "5",
+                "4",
+                "-4"
+            ],
+            "hint": "Koëffisiënt = getal voor x, konstante = los nommer."
+        },
+        {
+            "text": "Wat is die veranderlike in 8m + 3n?",
+            "steps": [
+                "Veranderlikes = m en n"
+            ],
+            "solution": [
+                "m",
+                "n"
+            ],
+            "distractors": [
+                "8",
+                "3",
+                "mn"
+            ],
+            "hint": "Veranderlikes is die letters wat onbekend is."
+        },
+        {
+            "text": "Wat is die konstante in 2x + 7y + 5?",
+            "steps": [
+                "Konstante = 5"
+            ],
+            "solution": [
+                "5"
+            ],
+            "distractors": [
+                "2",
+                "7",
+                "x"
+            ],
+            "hint": "Konstante is nommers sonder veranderlike."
+        },
+        {
+            "text": "Identifiseer koëffisiënt in 9a + 3b",
+            "steps": [
+                "Koëffisiënt van a = 9",
+                "Koëffisiënt van b = 3"
+            ],
+            "solution": [
+                "9",
+                "3"
+            ],
+            "distractors": [
+                "3",
+                "9",
+                "0"
+            ],
+            "hint": "Koëffisiënt is die getal voor die veranderlike."
+        },
+        {
+            "text": "Skryf 5xy - 3x + 2 in standaard vorm",
+            "steps": [
+                "Standaard vorm: 5xy - 3x + 2"
+            ],
+            "solution": [
+                "5xy - 3x + 2"
+            ],
+            "distractors": [
+                "5xy + 2 - 3x",
+                "5x -3y +2",
+                "2 + 5xy -3x"
+            ],
+            "hint": "Plaas veranderlikes eerste, konstante laastens."
+        },
+        {
+            "text": "Identifiseer koëffisiënt in 6p - 4q + 7",
+            "steps": [
+                "Koëffisiënt van p = 6",
+                "Koëffisiënt van q = -4"
+            ],
+            "solution": [
+                "6",
+                "-4"
+            ],
+            "distractors": [
+                "4",
+                "6",
+                "7"
+            ],
+            "hint": "Koëffisiënt is die getal voor die veranderlike."
+        }
+    ],
+    "FaktoreVeelvoude": [
+        {
+            "text": "Vind die faktore van 12",
+            "steps": [
+                "Faktore = 1,2,3,4,6,12"
+            ],
+            "solution": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "6",
+                "12"
+            ],
+            "distractors": [
+                "1,2,4,8,12",
+                "2,3,4,6",
+                "1,2,3,6"
+            ],
+            "hint": "Faktore is getalle wat 12 deel sonder oorblyf."
+        },
+        {
+            "text": "Vind die gemeenskaplike faktore van 12 en 18",
+            "steps": [
+                "Faktore van 12: 1,2,3,4,6,12",
+                "Faktore van 18: 1,2,3,6,9,18",
+                "Gedeelde faktore: 1,2,3,6"
+            ],
+            "solution": [
+                "1",
+                "2",
+                "3",
+                "6"
+            ],
+            "distractors": [
+                "1,2,3,4",
+                "2,3,6,9",
+                "1,3,6,12"
+            ],
+            "hint": "Kyk watter faktore in albei voorkom."
+        },
+        {
+            "text": "Vind die veelvoud van 7 onder 50",
+            "steps": [
+                "7,14,21,28,35,42,49"
+            ],
+            "solution": [
+                "7",
+                "14",
+                "21",
+                "28",
+                "35",
+                "42",
+                "49"
+            ],
+            "distractors": [
+                "7,14,21,28",
+                "8,16,24,32",
+                "6,12,18,24"
+            ],
+            "hint": "Vermenigvuldig 7 met 1,2,3,... totdat jy 50 bereik."
+        },
+        {
+            "text": "Is 36 'n veelvoud van 9?",
+            "steps": [
+                "36 ÷ 9 = 4 → heel getal",
+                "Ja, dit is 'n veelvoud"
+            ],
+            "solution": [
+                "Ja"
+            ],
+            "distractors": [
+                "Nee",
+                "Miskien",
+                "Onbeskikbaar"
+            ],
+            "hint": "Deel 36 deur 9."
+        },
+        {
+            "text": "Vind die grootste gemene deler van 24 en 36",
+            "steps": [
+                "Faktore van 24:1,2,3,4,6,8,12,24",
+                "Faktore van 36:1,2,3,4,6,9,12,18,36",
+                "Grootste gemene deler = 12"
+            ],
+            "solution": [
+                "12"
+            ],
+            "distractors": [
+                "6",
+                "9",
+                "18"
+            ],
+            "hint": "Kyk watter is die grootste gemeenskaplike faktor."
+        },
+        {
+            "text": "Is 45 deelbaar deur 5?",
+            "steps": [
+                "Laatste syfer = 5 → ja"
+            ],
+            "solution": [
+                "Ja"
+            ],
+            "distractors": [
+                "Nee",
+                "Soms",
+                "Onbeskikbaar"
+            ],
+            "hint": "As die getal eindig met 0 of 5, is dit deelbaar deur 5."
+        },
+        {
+            "text": "Vind die faktore van 20",
+            "steps": [
+                "Faktore = 1,2,4,5,10,20"
+            ],
+            "solution": [
+                "1",
+                "2",
+                "4",
+                "5",
+                "10",
+                "20"
+            ],
+            "distractors": [
+                "1,2,5,10",
+                "2,4,5,10",
+                "1,2,4,10"
+            ],
+            "hint": "Kyk watter getalle 20 deel."
+        },
+        {
+            "text": "Vind die kleinste gemene veelvoud van 4 en 6",
+            "steps": [
+                "Veelvoude van 4:4,8,12,16,...",
+                "Veelvoude van 6:6,12,18,...",
+                "KGV = 12"
+            ],
+            "solution": [
+                "12"
+            ],
+            "distractors": [
+                "24",
+                "6",
+                "18"
+            ],
+            "hint": "Kyk watter veelvoud eerste in albei verskyn."
+        },
+        {
+            "text": "Is 54 'n veelvoud van 9?",
+            "steps": [
+                "54 ÷ 9 = 6 → heel getal",
+                "Ja"
+            ],
+            "solution": [
+                "Ja"
+            ],
+            "distractors": [
+                "Nee",
+                "Soms",
+                "Onbeskikbaar"
+            ],
+            "hint": "Deel 54 deur 9."
+        },
+        {
+            "text": "Vind die faktore van 15",
+            "steps": [
+                "Faktore = 1,3,5,15"
+            ],
+            "solution": [
+                "1",
+                "3",
+                "5",
+                "15"
+            ],
+            "distractors": [
+                "1,3,5",
+                "1,3,15",
+                "3,5,15"
+            ],
+            "hint": "Kyk watter getalle 15 deel."
+        }
+    ],
+    "OrderOfOperations": [
+        {
+            "text": "Bereken: 2 + 3 × 4",
+            "steps": [
+                "Eerst vermenigvuldig: 3×4=12",
+                "2+12=14"
+            ],
+            "solution": [
+                "14"
+            ],
+            "distractors": [
+                "20",
+                "18",
+                "24"
+            ],
+            "hint": "Vermenigvuldiging eers, dan byvoeging."
+        },
+        {
+            "text": "Bereken: (5 + 3) × 2",
+            "steps": [
+                "5+3=8",
+                "8×2=16"
+            ],
+            "solution": [
+                "16"
+            ],
+            "distractors": [
+                "13",
+                "10",
+                "15"
+            ],
+            "hint": "Hakies eers, dan vermenigvuldig."
+        },
+        {
+            "text": "Bereken: 10 ÷ 2 + 6",
+            "steps": [
+                "10 ÷ 2 = 5",
+                "5 + 6 = 11"
+            ],
+            "solution": [
+                "11"
+            ],
+            "distractors": [
+                "8",
+                "16",
+                "12"
+            ],
+            "hint": "Deel eerste, tel daarna op."
+        },
+        {
+            "text": "Bereken: 8 - 4 ÷ 2",
+            "steps": [
+                "4 ÷ 2 = 2",
+                "8 - 2 = 6"
+            ],
+            "solution": [
+                "6"
+            ],
+            "distractors": [
+                "4",
+                "2",
+                "8"
+            ],
+            "hint": "Vermenigvuldig of deel eers, tel of trek daarna."
+        },
+        {
+            "text": "Bereken: 3 + 6 ÷ 3 × 2",
+            "steps": [
+                "6 ÷ 3 = 2",
+                "2 × 2 = 4",
+                "3 + 4 = 7"
+            ],
+            "solution": [
+                "7"
+            ],
+            "distractors": [
+                "6",
+                "8",
+                "5"
+            ],
+            "hint": "Vermenigvuldig en deel van links na regs."
+        },
+        {
+            "text": "Bereken: (12 - 4) ÷ 2",
+            "steps": [
+                "12 - 4 = 8",
+                "8 ÷ 2 = 4"
+            ],
+            "solution": [
+                "4"
+            ],
+            "distractors": [
+                "8",
+                "6",
+                "2"
+            ],
+            "hint": "Hakies eers, dan deel."
+        },
+        {
+            "text": "Bereken: 5 × (2 + 3)",
+            "steps": [
+                "2 + 3 = 5",
+                "5 × 5 = 25"
+            ],
+            "solution": [
+                "25"
+            ],
+            "distractors": [
+                "15",
+                "20",
+                "30"
+            ],
+            "hint": "Hakies eers, dan vermenigvuldig."
+        },
+        {
+            "text": "Bereken: 18 ÷ (3 × 2)",
+            "steps": [
+                "3 × 2 = 6",
+                "18 ÷ 6 = 3"
+            ],
+            "solution": [
+                "3"
+            ],
+            "distractors": [
+                "6",
+                "9",
+                "2"
+            ],
+            "hint": "Vermenigvuldig in hakies, deel daarna."
+        },
+        {
+            "text": "Bereken: 7 + 2 × (3 + 1)",
+            "steps": [
+                "3 + 1 = 4",
+                "2 × 4 = 8",
+                "7 + 8 = 15"
+            ],
+            "solution": [
+                "15"
+            ],
+            "distractors": [
+                "12",
+                "16",
+                "14"
+            ],
+            "hint": "Hakies eers, vermenigvuldig, dan tel op."
+        },
+        {
+            "text": "Bereken: (6 + 2) ÷ (1 + 1)",
+            "steps": [
+                "6 + 2 = 8",
+                "1 + 1 = 2",
+                "8 ÷ 2 = 4"
+            ],
+            "solution": [
+                "4"
+            ],
+            "distractors": [
+                "2",
+                "6",
+                "8"
+            ],
+            "hint": "Bereken beide hakies, dan deel."
+        }
+    ]
 }

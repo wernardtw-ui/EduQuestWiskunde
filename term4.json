@@ -1,5 +1,5 @@
 {
-  "Data Handling": [
+  "Dataverwerking": [
     {
       "text": "Vind die gemiddelde van 5, 7, 9, 10",
       "steps": [
@@ -109,7 +109,7 @@
       "hint": "Som ÷ aantal."
     }
   ],
-  "Probability": [
+  "Waarskynlikheid: [
     {
       "text": "Watter is die kans om 'n 6 te gooi met 'n dobbelsteen?",
       "steps": [
@@ -217,5 +217,371 @@
       "distractors": ["1/3","1/2","1/5"],
       "hint": "Aantal sukses ÷ totaal probeerslae."
     }
+  ],
+
+  "Datahantering": [
+    {
+      "text": "Die volgende data stel die ouderdomme van 5 leerders voor: 12, 13, 12, 14, 13. Wat is die modus?",
+      "steps": ["Tel elke ouderdom: 12(2), 13(2), 14(1)", "Modus = 12 en 13"],
+      "solution": ["12 en 13"],
+      "distractors": ["12","13","14"],
+      "hint": "Die modus is die waarde wat die meeste voorkom."
+    },
+    {
+      "text": "Vind die mediaan van die data: 3, 5, 8, 9, 10",
+      "steps": ["Rangskik: 3,5,8,9,10", "Mediaan = middelste waarde = 8"],
+      "solution": ["8"],
+      "distractors": ["5","9","6"],
+      "hint": "Die mediaan is die middelste waarde in 'n geordende stel."
+    },
+    {
+      "text": "Wat is die gemiddelde van 4, 6, 8, 10?",
+      "steps": ["Gemiddelde = (4+6+8+10)/4 = 28/4 = 7"],
+      "solution": ["7"],
+      "distractors": ["6","8","5"],
+      "hint": "Som alle waardes en deel deur die aantal."
+    },
+    {
+      "text": "Hoeveel data punte is daar in: 5, 7, 8, 10, 12, 15?",
+      "steps": ["Tel elke element", "Aantal punte = 6"],
+      "solution": ["6"],
+      "distractors": ["5","7","4"],
+      "hint": "Tel eenvoudig die items in die lys."
+    },
+    {
+      "text": "Die volgende data is gegee in 'n tabel: Hoeveel keer kom 'n waarde van 10 voor? 8,10,12,10,9,10",
+      "steps": ["Tel 10 se voorkoms: 3 keer"],
+      "solution": ["3"],
+      "distractors": ["2","4","1"],
+      "hint": "Tel net elke keer as 10 voorkom."
+    },
+    {
+      "text": "Watter tipe grafiek is geskik vir vergelyking van kategorieë?",
+      "steps": ["Staafgrafiek word gebruik vir vergelyking van kategorieë."],
+      "solution": ["Staafgrafiek"],
+      "distractors": ["Lyngrafiek","Sirkelgrafiek","Histogram"],
+      "hint": "Kyk na kategorieë en vergelyk hoeveelhede."
+    },
+    {
+      "text": "Watter grafiek is geskik om verandering oor tyd te wys?",
+      "steps": ["Lyngrafiek wys verandering oor tyd."],
+      "solution": ["Lyngrafiek"],
+      "distractors": ["Staafgrafiek","Sirkelgrafiek","Tabel"],
+      "hint": "Gebruik tyd op x-as."
+    },
+    {
+      "text": "Wat noem jy die grootste waarde in 'n data stel?",
+      "steps": ["Die maksimum waarde is die grootste waarde."],
+      "solution": ["Maksimum"],
+      "distractors": ["Minimum","Mediaan","Modus"],
+      "hint": "Kyk na die hoogste getal."
+    },
+    {
+      "text": "Wat noem jy die kleinste waarde in 'n data stel?",
+      "steps": ["Die minimum waarde is die kleinste waarde."],
+      "solution": ["Minimum"],
+      "distractors": ["Maksimum","Mediaan","Modus"],
+      "hint": "Kyk na die laagste getal."
+    },
+    {
+      "text": "Hoeveel groepe is daar in 'n sirkelgrafiek met 4 sektore?",
+      "steps": ["Aantal groepe = 4"],
+      "solution": ["4"],
+      "distractors": ["3","5","2"],
+      "hint": "Tel die sektore in die sirkel."
+    }
+  ],
+
+  "SentraleTendens": [
+    {
+      "text": "Vind die gemiddelde van 7, 8, 9, 10, 11",
+      "steps": ["Gemiddelde = (7+8+9+10+11)/5 = 45/5 = 9"],
+      "solution": ["9"],
+      "distractors": ["8","10","7"],
+      "hint": "Som alle waardes en deel deur aantal."
+    },
+    {
+      "text": "Vind die mediaan van 2, 5, 7, 9, 12",
+      "steps": ["Rangskik: 2,5,7,9,12", "Mediaan = 7"],
+      "solution": ["7"],
+      "distractors": ["5","9","6"],
+      "hint": "Die middelste waarde in 'n geordende lys."
+    },
+    {
+      "text": "Vind die modus van 3, 3, 4, 5, 5, 5, 6",
+      "steps": ["Tel voorkoms: 5 kom 3 keer voor, ander minder", "Modus = 5"],
+      "solution": ["5"],
+      "distractors": ["3","4","6"],
+      "hint": "Kyk watter waarde die meeste voorkom."
+    },
+    {
+      "text": "Gemiddelde van 6, 8, 10, 12, 14",
+      "steps": ["Gemiddelde = (6+8+10+12+14)/5 = 50/5 = 10"],
+      "solution": ["10"],
+      "distractors": ["9","11","12"],
+      "hint": "Som en deel deur aantal."
+    },
+    {
+      "text": "Mediaan van 1, 3, 5, 7, 9, 11",
+      "steps": ["Selfde as rangskik: middelste twee 5 en 7, mediaan = (5+7)/2=6"],
+      "solution": ["6"],
+      "distractors": ["5","7","8"],
+      "hint": "Neem gemiddelde van middelste twee vir ewe aantal."
+    },
+    {
+      "text": "Modus van 8, 9, 8, 10, 8, 11",
+      "steps": ["8 kom 3 keer voor, meeste", "Modus = 8"],
+      "solution": ["8"],
+      "distractors": ["9","10","11"],
+      "hint": "Kyk vir die waarde wat die meeste voorkom."
+    },
+    {
+      "text": "Gemiddelde van 5, 7, 9, 11",
+      "steps": ["(5+7+9+11)/4 = 32/4 = 8"],
+      "solution": ["8"],
+      "distractors": ["7","9","6"],
+      "hint": "Som en deel deur aantal."
+    },
+    {
+      "text": "Mediaan van 4, 8, 12, 16, 20",
+      "steps": ["Middelste waarde = 12"],
+      "solution": ["12"],
+      "distractors": ["8","16","10"],
+      "hint": "Middelste getal in geordende lys."
+    },
+    {
+      "text": "Modus van 1, 2, 2, 3, 4, 2, 5",
+      "steps": ["2 kom 3 keer voor, meeste", "Modus = 2"],
+      "solution": ["2"],
+      "distractors": ["1","3","4"],
+      "hint": "Kyk wat die meeste voorkom."
+    },
+    {
+      "text": "Gemiddelde van 10, 20, 30, 40, 50",
+      "steps": ["(10+20+30+40+50)/5 = 150/5 = 30"],
+      "solution": ["30"],
+      "distractors": ["25","35","40"],
+      "hint": "Som en deel deur aantal."
+    }
+  ],
+
+  "Waarskynlikheidskonsepte": [
+    {
+      "text": "Wat is die waarskynlikheid om 'n 3 uit 'n dobbelsteen te rol?",
+      "steps": ["Een 3 van 6 moontlike uitkomste = 1/6"],
+      "solution": ["1/6"],
+      "distractors": ["1/5","1/4","1/3"],
+      "hint": "Teoretiese waarskynlikheid = gunstige / totale"
+    },
+    {
+      "text": "Wat is die waarskynlikheid om 'n kop te gooi met 'n munt?",
+      "steps": ["Een kop van twee moontlike uitkomste = 1/2"],
+      "solution": ["1/2"],
+      "distractors": ["1/3","1/4","1/5"],
+      "hint": "Munt het twee kante."
+    },
+    {
+      "text": "Eksperimentele waarskynlikheid: Rol dobbelsteen 60 keer en kry 12 keer 'n 4. Vind waarskynlikheid.",
+      "steps": ["P = 12/60 = 1/5"],
+      "solution": ["1/5"],
+      "distractors": ["1/4","1/6","1/3"],
+      "hint": "Eksperimentele waarskynlikheid = aantal sukses / totaal"
+    },
+    {
+      "text": "Wat is waarskynlikheid om 'n rooi bal te kies uit 5 rooi en 3 blou balle?",
+      "steps": ["P = 5/(5+3)=5/8"],
+      "solution": ["5/8"],
+      "distractors": ["3/8","1/2","5/3"],
+      "hint": "Teoretiese waarskynlikheid = gunstige / totaal"
+    },
+    {
+      "text": "Wat is waarskynlikheid om 'n ewe getal te rol op 'n dobbelsteen?",
+      "steps": ["Ewe = 2,4,6 van 6 moontlike = 3/6=1/2"],
+      "solution": ["1/2"],
+      "distractors": ["1/3","1/4","1/6"],
+      "hint": "Tel die gunstige uitkomste."
+    },
+    {
+      "text": "Wat is waarskynlikheid om 'n 1 of 2 te rol?",
+      "steps": ["P = 2/6 = 1/3"],
+      "solution": ["1/3"],
+      "distractors": ["1/2","1/4","1/6"],
+      "hint": "Tel gunstige uitkomste."
+    },
+    {
+      "text": "Wat is waarskynlikheid om 'n rooi of blou bal te kies uit 2 rooi, 3 blou, 5 groen?",
+      "steps": ["P = (2+3)/10=5/10=1/2"],
+      "solution": ["1/2"],
+      "distractors": ["1/3","2/5","3/10"],
+      "hint": "Tel al die gunstige uitkomste."
+    },
+    {
+      "text": "Eksperimentele waarskynlikheid: Gooi munt 50 keer en kry 28 keer kop. Vind waarskynlikheid.",
+      "steps": ["P = 28/50 = 14/25"],
+      "solution": ["14/25"],
+      "distractors": ["1/2","13/25","1/5"],
+      "hint": "Eksperimentele waarskynlikheid = sukses/totaal"
+    },
+    {
+      "text": "Wat is waarskynlikheid van 'n 5 of 6 te rol?",
+      "steps": ["P = 2/6 = 1/3"],
+      "solution": ["1/3"],
+      "distractors": ["1/2","1/4","1/6"],
+      "hint": "Tel gunstige uitkomste"
+    },
+    {
+      "text": "Wat is waarskynlikheid om nie 'n 6 te rol nie?",
+      "steps": ["1 - P(6) = 1 - 1/6 = 5/6"],
+      "solution": ["5/6"],
+      "distractors": ["1/6","1/2","2/3"],
+      "hint": "Gebruik komplementreël: P(nie sukses)=1-P(sukses)"
+    }
+  ],
+
+  "Finansiële Wiskunde": [
+    {
+      "text": "Vind eenvoudige rente: P=1000, r=5%, t=2 jaar",
+      "steps": ["I = P*r*t/100 = 1000*5*2/100 = 100"],
+      "solution": ["100"],
+      "distractors": ["90","110","120"],
+      "hint": "Formule: I = P*r*t/100"
+    },
+    {
+      "text": "Vind rente vir 1500 R by 6% per jaar vir 3 jaar",
+      "steps": ["I=1500*6*3/100=270"],
+      "solution": ["270"],
+      "distractors": ["260","280","250"],
+      "hint": "Gebruik I=P*r*t/100"
+    },
+    {
+      "text": "Wat is 20% van 500?",
+      "steps": ["0.2*500=100"],
+      "solution": ["100"],
+      "distractors": ["80","120","150"],
+      "hint": "Vermenigvuldig persentasie met totaal."
+    },
+    {
+      "text": "As iets kos 400 R en verminder met 25%, wat is nuwe prys?",
+      "steps": ["25% van 400=100", "Nuwe prys = 400-100=300"],
+      "solution": ["300"],
+      "distractors": ["250","350","200"],
+      "hint": "Bereken persentasie en trek af."
+    },
+    {
+      "text": "As jou salaris 5000 R is en 10% belasting gehef word, hoeveel bly oor?",
+      "steps": ["10% van 5000=500", "5000-500=4500"],
+      "solution": ["4500"],
+      "distractors": ["4000","4600","4400"],
+      "hint": "Trek belasting af van totaal."
+    },
+    {
+      "text": "Maak begroting: inkomste 6000 R, uitgawes: 2500 R huur, 1500 R kos, 500 R vervoer. Hoeveel spaar jy?",
+      "steps": ["Spaar = 6000-2500-1500-500=1500"],
+      "solution": ["1500"],
+      "distractors": ["1400","1600","1200"],
+      "hint": "Trek al die uitgawes af."
+    },
+    {
+      "text": "Wat is 15% van 200?",
+      "steps": ["0.15*200=30"],
+      "solution": ["30"],
+      "distractors": ["25","35","40"],
+      "hint": "Vermenigvuldig persentasie met totaal."
+    },
+    {
+      "text": "As jy 1200 R belê teen 8% vir 1 jaar, vind rente",
+      "steps": ["I = 1200*8*1/100=96"],
+      "solution": ["96"],
+      "distractors": ["90","100","92"],
+      "hint": "Formule: I = P*r*t/100"
+    },
+    {
+      "text": "Bereken 30% van 450",
+      "steps": ["0.3*450=135"],
+      "solution": ["135"],
+      "distractors": ["140","130","150"],
+      "hint": "Vermenigvuldig persentasie met totaal"
+    },
+    {
+      "text": "As prys styg van 500 R na 600 R, wat is persentasie toename?",
+      "steps": ["ΔP=600-500=100", "Persentasie = 100/500*100=20%"],
+      "solution": ["20%"],
+      "distractors": ["10%","15%","25%"],
+      "hint": "Persentasie verandering = (ΔP/ oorspronklike)*100"
+    }
+  ],
+
+  "HersieningTerm1to3": [
+    {
+      "text": "Vind x: 2x + 5 = 13",
+      "steps": ["2x = 13-5 = 8", "x=4"],
+      "solution": ["4"],
+      "distractors": ["3","5","6"],
+      "hint": "Los lineêre vergelyking op."
+    },
+    {
+      "text": "Vind gemiddelde van 2,4,6,8",
+      "steps": ["(2+4+6+8)/4 = 20/4 = 5"],
+      "solution": ["5"],
+      "distractors": ["4","6","3"],
+      "hint": "Som en deel deur aantal."
+    },
+    {
+      "text": "Vind hypotenusa: a=5, b=12",
+      "steps": ["c²=5²+12²=25+144=169", "c=13"],
+      "solution": ["13"],
+      "distractors": ["12","14","15"],
+      "hint": "Gebruik Pythagoras."
+    },
+    {
+      "text": "Vind omtrek van reghoek: l=6, b=4",
+      "steps": ["Omtrek = 2(l+b) = 2(6+4)=20"],
+      "solution": ["20"],
+      "distractors": ["18","22","24"],
+      "hint": "Omtrek = 2(l+b)"
+    },
+    {
+      "text": "Wat is die modus van 1,2,2,3,4?",
+      "steps": ["2 kom meeste voor", "Modus = 2"],
+      "solution": ["2"],
+      "distractors": ["1","3","4"],
+      "hint": "Kyk vir meeste voorkom."
+    },
+    {
+      "text": "Vind helling van lyn deur P(1,2) en Q(3,6)",
+      "steps": ["m=(6-2)/(3-1)=4/2=2"],
+      "solution": ["2"],
+      "distractors": ["1","3","4"],
+      "hint": "Δy/Δx"
+    },
+    {
+      "text": "Los vergelyking op: 3x - 7 = 2",
+      "steps": ["3x = 2+7=9", "x=3"],
+      "solution": ["3"],
+      "distractors": ["2","4","5"],
+      "hint": "Los lineêre vergelyking op."
+    },
+    {
+      "text": "Vind mediaan van 5,7,9,11,13",
+      "steps": ["Middelste waarde = 9"],
+      "solution": ["9"],
+      "distractors": ["7","11","10"],
+      "hint": "Middelste getal in geordende lys."
+    },
+    {
+      "text": "Vind oppervlakte van sirkel r=7",
+      "steps": ["A=π*r²=3.1416*7²≈153.94"],
+      "solution": ["153.94"],
+      "distractors": ["150","160","140"],
+      "hint": "Oppervlakte = πr²"
+    },
+    {
+      "text": "Los vir y: 2y+3≤9",
+      "steps": ["2y≤9-3=6", "y≤3"],
+      "solution": ["≤3"],
+      "distractors": ["≤2","≤4","≤5"],
+      "hint": "Los lineêre ongelykheid op."
+    }
   ]
 }
+

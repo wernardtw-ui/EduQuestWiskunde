@@ -1,5 +1,5 @@
 {
-  "Geometry": [
+  "Meetkunde": [
     {
       "text": "Vind die omtrek van ’n reghoek met lengtes 8 cm en 5 cm",
       "steps": [
@@ -116,7 +116,7 @@
       "hint": "Gebruik oppervlakte formule vir parallelogram."
     }
   ],
-  "Measurement": [
+  "Meting": [
     {
       "text": "Los op: 5x + 3 = 23",
       "steps": [
@@ -224,5 +224,444 @@
       "distractors": ["4","5","2"],
       "hint": "Tel 5 by en deel deur 6."
     }
+  ],
+
+  "EienskappeVanVorms": [
+    {
+      "text": "Hoeveel hoeke het 'n vierkant?",
+      "steps": ["'n Vierkant het 4 kante en elke hoek is 'n reghoek", "Aantal hoeke = 4"],
+      "solution": ["4"],
+      "distractors": ["3","5","6"],
+      "hint": "Telle al die kante van 'n vierkant."
+    },
+    {
+      "text": "Hoeveel kante het 'n driehoek?",
+      "steps": ["'n Driehoek het 3 kante", "Aantal kante = 3"],
+      "solution": ["3"],
+      "distractors": ["4","5","6"],
+      "hint": "Driehoek = 3 kante."
+    },
+    {
+      "text": "Die som van die binnehoeke van 'n vierhoek is?",
+      "steps": ["Som van binnehoeke van 'n vierhoek = (4-2)×180° = 360°"],
+      "solution": ["360°"],
+      "distractors": ["180°","270°","540°"],
+      "hint": "Gebruik formule (n-2)×180°."
+    },
+    {
+      "text": "Die som van die binnehoeke van 'n seshoek is?",
+      "steps": ["(6-2)×180° = 4×180° = 720°"],
+      "solution": ["720°"],
+      "distractors": ["540°","600°","360°"],
+      "hint": "Gebruik (n-2)×180°."
+    },
+    {
+      "text": "Hoeveel sentrale hoeke van 'n sirkel is daar?",
+      "steps": ["'n Sirkel = 360° sentraalhoek"],
+      "solution": ["360°"],
+      "distractors": ["180°","90°","270°"],
+      "hint": "'n Volledige sirkel het 360°."
+    },
+    {
+      "text": "Wat is die naam van 'n vierhoek met al vier kante gelyk?",
+      "steps": ["Vierkant = 4 gelyke kante"],
+      "solution": ["Vierkant"],
+      "distractors": ["Reghoek","Ruit","Paralelogram"],
+      "hint": "Al die kante en hoeke is gelyk."
+    },
+    {
+      "text": "Wat is 'n reghoekige driehoek?",
+      "steps": ["Driehoek met een reghoek = 90°"],
+      "solution": ["Driehoek met reghoek"],
+      "distractors": ["Gelyksydige driehoek","Skewed driehoek","Vierhoek"],
+      "hint": "Kyk vir 90° hoek."
+    },
+    {
+      "text": "Hoeveel simmetrie-asse het 'n reghoek?",
+      "steps": ["Reghoek het 2 simmetrie-asse"],
+      "solution": ["2"],
+      "distractors": ["1","3","4"],
+      "hint": "Trek asse deur middelpunte van kante."
+    },
+    {
+      "text": "Hoeveel hoeke het 'n regte driehoek?",
+      "steps": ["Regte driehoek = 3 hoeke, een is 90°"],
+      "solution": ["3"],
+      "distractors": ["2","4","5"],
+      "hint": "Alle driehoeke het 3 hoeke."
+    },
+    {
+      "text": "Watter vierhoek het net een paar gelyke kante?",
+      "steps": ["Diverse tipe trapezium"],
+      "solution": ["Trapezium"],
+      "distractors": ["Vierkant","Reghoek","Ruit"],
+      "hint": "Kyk vir net een paar gelyke kante."
+    }
+  ],
+
+  "GelykheidEnOoreenkoms": [
+    {
+      "text": "Wat beteken twee figure is kongruent?",
+      "steps": ["Kongruente figure = selfde vorm en grootte"],
+      "solution": ["Selfde vorm en grootte"],
+      "distractors": ["Net selfde vorm","Net selfde grootte","Geen verband"],
+      "hint": "Beide vorm en grootte moet dieselfde wees."
+    },
+    {
+      "text": "Wat beteken twee figure is soortgelyk?",
+      "steps": ["Soortgelyke figure = selfde vorm, grootte kan verskil"],
+      "solution": ["Selfde vorm, grootte kan verskil"],
+      "distractors": ["Selfde grootte, vorm kan verskil","Geen ooreenkoms","Gelyke hoeke alleen"],
+      "hint": "Kyk na verhouding van kante."
+    },
+    {
+      "text": "As twee driehoeke kongruent is, wat is gelyk?",
+      "steps": ["Alle kante en hoeke is gelyk"],
+      "solution": ["Alle kante en hoeke"],
+      "distractors": ["Net kante","Net hoeke","Net diagonaal"],
+      "hint": "Kongruente driehoeke is identies."
+    },
+    {
+      "text": "As twee vierhoeke soortgelyk is, wat is gelyk?",
+      "steps": ["Alle ooreenstemmende hoeke is gelyk, kante in verhouding"],
+      "solution": ["Hoeke gelyk, kante in verhouding"],
+      "distractors": ["Alle kante gelyk","Net diagonale gelyk","Geen gelykheid"],
+      "hint": "Kyk na verhouding van kante en gelykheid van hoeke."
+    },
+    {
+      "text": "Wat is 'n verhouding van kongruente figure?",
+      "steps": ["1:1"],
+      "solution": ["1:1"],
+      "distractors": ["2:1","1:2","Geen verhouding"],
+      "hint": "Kongruent beteken selfde grootte."
+    },
+    {
+      "text": "Wat is 'n verhouding van soortgelyke figure?",
+      "steps": ["Verskil per geval, bv 2:3"],
+      "solution": ["In verhouding"],
+      "distractors": ["1:1 altyd","Geen verhouding","3:2 altyd"],
+      "hint": "Kante is in dieselfde verhouding."
+    },
+    {
+      "text": "Hoe weet jy twee driehoeke is soortgelyk?",
+      "steps": ["Ooreenstemmende hoeke gelyk, kante in verhouding"],
+      "solution": ["Hoeke gelyk, kante in verhouding"],
+      "distractors": ["Net kante gelyk","Net hoeke gelyk","Geen verband"],
+      "hint": "Gebruik hoek- of kant- verhouding toets."
+    },
+    {
+      "text": "Kan twee kongruente figure ook soortgelyk wees?",
+      "steps": ["Ja, kongruente figure is altyd soortgelyk"],
+      "solution": ["Ja"],
+      "distractors": ["Nee","Soms","Onbepaald"],
+      "hint": "Kongruent = soortgelyk + selfde grootte."
+    },
+    {
+      "text": "Kan twee soortgelyke figure kongruent wees?",
+      "steps": ["Slegs as verhouding 1:1"],
+      "solution": ["Ja, as 1:1"],
+      "distractors": ["Nee altyd","Soms","Onbepaald"],
+      "hint": "Kyk verhouding van kante."
+    },
+    {
+      "text": "As △ABC ≅ △DEF, wat kan jy sê oor hoek A?",
+      "steps": ["Hoek A = hoek D"],
+      "solution": ["Hoek D"],
+      "distractors": ["Hoek E","Hoek F","Geen van beide"],
+      "hint": "Kongruente driehoeke het ooreenstemmende hoeke gelyk."
+    }
+  ],
+
+  "OmtrekOppervlakteVolume": [
+    {
+      "text": "Vind die omtrek van 'n reghoek met lengte = 5m, breedte = 3m",
+      "steps": ["Omtrek = 2(l+b) = 2(5+3) = 16m"],
+      "solution": ["16m"],
+      "distractors": ["15m","14m","18m"],
+      "hint": "Omtrek = 2(l+b)"
+    },
+    {
+      "text": "Vind die oppervlakte van 'n reghoek met lengte = 6m, breedte = 4m",
+      "steps": ["Oppervlakte = l×b = 6×4 = 24m²"],
+      "solution": ["24m²"],
+      "distractors": ["20m²","22m²","26m²"],
+      "hint": "Oppervlakte = lengte × breedte"
+    },
+    {
+      "text": "Vind volume van 'n kubus met sy = 3cm",
+      "steps": ["Volume = sy³ = 3³ = 27cm³"],
+      "solution": ["27cm³"],
+      "distractors": ["9cm³","18cm³","36cm³"],
+      "hint": "Kubus: volume = sy³"
+    },
+    {
+      "text": "Vind oppervlakte van sirkel met radius = 7cm",
+      "steps": ["Oppervlakte = πr² = 3.14×7² ≈ 153.86cm²"],
+      "solution": ["153.86cm²"],
+      "distractors": ["140cm²","150cm²","160cm²"],
+      "hint": "Gebruik formule A = πr²"
+    },
+    {
+      "text": "Vind die omtrek van 'n sirkel met radius = 5m",
+      "steps": ["Omtrek = 2πr = 2×3.14×5 ≈ 31.4m"],
+      "solution": ["31.4m"],
+      "distractors": ["30m","32m","33m"],
+      "hint": "Gebruik Omtrek = 2πr"
+    },
+    {
+      "text": "Vind die volume van 'n reghoekige prisma: l=4, b=3, h=5",
+      "steps": ["Volume = l×b×h = 4×3×5 = 60m³"],
+      "solution": ["60m³"],
+      "distractors": ["50","55","65"],
+      "hint": "Volume = l×b×h"
+    },
+    {
+      "text": "Vind oppervlakte van 'n vierkant met sy = 8cm",
+      "steps": ["Oppervlakte = sy² = 8² = 64cm²"],
+      "solution": ["64cm²"],
+      "distractors": ["60","62","66"],
+      "hint": "Oppervlakte = sy²"
+    },
+    {
+      "text": "Vind omtrek van 'n reghoek met lengte = 10m, breedte = 7m",
+      "steps": ["Omtrek = 2(l+b) = 2(10+7) = 34m"],
+      "solution": ["34m"],
+      "distractors": ["30m","32m","36m"],
+      "hint": "Omtrek = 2(l+b)"
+    },
+    {
+      "text": "Vind oppervlakte van 'n driehoek: basis = 8m, hoogte = 5m",
+      "steps": ["A = 1/2 × b × h = 1/2 × 8 × 5 = 20m²"],
+      "solution": ["20m²"],
+      "distractors": ["18m²","22m²","24m²"],
+      "hint": "Oppervlakte = 1/2 × b × h"
+    },
+    {
+      "text": "Vind volume van silinder: radius = 3cm, hoogte = 7cm",
+      "steps": ["V = πr²h = 3.14×3²×7 ≈ 197.22cm³"],
+      "solution": ["197.22cm³"],
+      "distractors": ["190","200","210"],
+      "hint": "Volume = πr²h"
+    }
+  ],
+
+  "Transformasies": [
+    {
+      "text": "Wat is die beeld van punt A(2,3) na refleksie oor x-as?",
+      "steps": ["Refleksie oor x-as: y verander teken", "Beeld = (2,-3)"],
+      "solution": ["(2,-3)"],
+      "distractors": ["(-2,3)","(-2,-3)","(2,3)"],
+      "hint": "Verander die teken van y"
+    },
+    {
+      "text": "Wat is die beeld van punt B(4,-5) na refleksie oor y-as?",
+      "steps": ["Refleksie oor y-as: x verander teken", "Beeld = (-4,-5)"],
+      "solution": ["(-4,-5)"],
+      "distractors": ["(4,5)","(-4,5)","(4,-5)"],
+      "hint": "Verander die teken van x"
+    },
+    {
+      "text": "Punt C(1,2) word 90° roterend oor oorsprong. Vind nuwe koordinat",
+      "steps": ["90° rotasie: (x,y) → (-y,x)", "Beeld = (-2,1)"],
+      "solution": ["(-2,1)"],
+      "distractors": ["(2,-1)","(1,-2)","(-1,2)"],
+      "hint": "Gebruik rotasie-formule"
+    },
+    {
+      "text": "Punt D(3,4) translatie met vektor (2,-1). Vind nuwe koordinat",
+      "steps": ["(x,y) + (a,b) = (3+2, 4-1) = (5,3)"],
+      "solution": ["(5,3)"],
+      "distractors": ["(5,5)","(1,3)","(3,3)"],
+      "hint": "Tel x en y apart by die vektor."
+    },
+    {
+      "text": "Punt E(2,3) vergroot met faktor 2 vanaf oorsprong",
+      "steps": ["(x,y) → (2x,2y) = (4,6)"],
+      "solution": ["(4,6)"],
+      "distractors": ["(3,5)","(4,5)","(2,3)"],
+      "hint": "Vermenigvuldig koördinate met vergrotingsfaktor"
+    },
+    {
+      "text": "Wat gebeur as 'n vorm 180° draai oor oorsprong?",
+      "steps": ["(x,y) → (-x,-y)"],
+      "solution": ["180° rotasie: (-x,-y)"],
+      "distractors": ["(x,-y)","(-x,y)","(y,x)"],
+      "hint": "Albei koördinate teken omdraai"
+    },
+    {
+      "text": "Punt F(5,0) translatie met vektor (-3,2)",
+      "steps": ["(5-3,0+2) = (2,2)"],
+      "solution": ["(2,2)"],
+      "distractors": ["(3,2)","(2,3)","(5,2)"],
+      "hint": "Tel x en y apart by vektor"
+    },
+    {
+      "text": "Punt G(-1,-2) refleksie oor x-as",
+      "steps": ["(x,-y) = (-1,2)"],
+      "solution": ["(-1,2)"],
+      "distractors": ["(1,-2)","(-1,-2)","(1,2)"],
+      "hint": "Verander y-teken"
+    },
+    {
+      "text": "Punt H(2,3) roterend 270° oor oorsprong",
+      "steps": ["270° rotasie: (x,y) → (y,-x) = (3,-2)"],
+      "solution": ["(3,-2)"],
+      "distractors": ["(-3,2)","(-2,3)","(2,-3)"],
+      "hint": "Gebruik rotasie-formule 270°"
+    },
+    {
+      "text": "Punt I(1,2) vergroot met faktor 3 vanaf oorsprong",
+      "steps": ["(3×1,3×2) = (3,6)"],
+      "solution": ["(3,6)"],
+      "distractors": ["(1,6)","(3,2)","(2,6)"],
+      "hint": "Vermenigvuldig koördinate met faktor"
+    }
+  ],
+
+  "Pythagorasstelling": [
+    {
+      "text": "Regte driehoek: a=3, b=4. Vind hypotenusa c",
+      "steps": ["c² = 3² + 4² = 9+16=25", "c = 5"],
+      "solution": ["5"],
+      "distractors": ["6","4","7"],
+      "hint": "c² = a² + b²"
+    },
+    {
+      "text": "Regte driehoek: a=5, c=13. Vind b",
+      "steps": ["b² = 13² - 5² = 169 - 25 = 144", "b=12"],
+      "solution": ["12"],
+      "distractors": ["10","13","14"],
+      "hint": "b² = c² - a²"
+    },
+    {
+      "text": "Regte driehoek: b=7, c=25. Vind a",
+      "steps": ["a² = 25² - 7² = 625 - 49 = 576", "a = 24"],
+      "solution": ["24"],
+      "distractors": ["23","25","20"],
+      "hint": "a² = c² - b²"
+    },
+    {
+      "text": "Regte driehoek: a=6, b=8. Vind hypotenusa",
+      "steps": ["c² = 6² + 8² = 36+64=100", "c=10"],
+      "solution": ["10"],
+      "distractors": ["12","8","9"],
+      "hint": "c² = a² + b²"
+    },
+    {
+      "text": "Regte driehoek: c=10, b=6. Vind a",
+      "steps": ["a² = 10² - 6² = 100-36=64", "a=8"],
+      "solution": ["8"],
+      "distractors": ["6","7","9"],
+      "hint": "a² = c² - b²"
+    },
+    {
+      "text": "Regte driehoek: a=9, b=12. Vind hypotenusa",
+      "steps": ["c² = 9² + 12² = 81+144=225", "c=15"],
+      "solution": ["15"],
+      "distractors": ["14","16","13"],
+      "hint": "c² = a² + b²"
+    },
+    {
+      "text": "Regte driehoek: a=8, c=17. Vind b",
+      "steps": ["b² = 17² - 8² = 289 - 64 = 225", "b=15"],
+      "solution": ["15"],
+      "distractors": ["16","14","13"],
+      "hint": "b² = c² - a²"
+    },
+    {
+      "text": "Regte driehoek: a=7, b=24. Vind hypotenusa",
+      "steps": ["c² = 7² + 24² = 49+576=625", "c=25"],
+      "solution": ["25"],
+      "distractors": ["24","26","23"],
+      "hint": "c² = a² + b²"
+    },
+    {
+      "text": "Regte driehoek: b=9, c=15. Vind a",
+      "steps": ["a² = 15² - 9² = 225 - 81 = 144", "a=12"],
+      "solution": ["12"],
+      "distractors": ["10","13","14"],
+      "hint": "a² = c² - b²"
+    },
+    {
+      "text": "Regte driehoek: a=5, b=12. Vind hypotenusa",
+      "steps": ["c² = 5² + 12² = 25 + 144 = 169", "c=13"],
+      "solution": ["13"],
+      "distractors": ["12","14","15"],
+      "hint": "c² = a² + b²"
+    }
+  ],
+
+  "Koördinaatgeometrie": [
+    {
+      "text": "Vind afstand tussen P(2,3) en Q(5,7)",
+      "steps": ["d = √((x2-x1)² + (y2-y1)²) = √((5-2)²+(7-3)²) = √(9+16)=√25=5"],
+      "solution": ["5"],
+      "distractors": ["6","4","7"],
+      "hint": "Gebruik afstandsformule"
+    },
+    {
+      "text": "Vind middelpunt van P(2,3) en Q(6,7)",
+      "steps": ["M = ((2+6)/2 , (3+7)/2) = (4,5)"],
+      "solution": ["(4,5)"],
+      "distractors": ["(3,4)","(5,6)","(2,3)"],
+      "hint": "Middelpunt = gemiddelde van koördinate"
+    },
+    {
+      "text": "Vind helling van lyn deur P(1,2) en Q(4,6)",
+      "steps": ["m = (y2-y1)/(x2-x1) = (6-2)/(4-1) = 4/3"],
+      "solution": ["4/3"],
+      "distractors": ["3/4","1","2"],
+      "hint": "Hellingsformule: Δy/Δx"
+    },
+    {
+      "text": "Vind afstand tussen A(-2,1) en B(2,5)",
+      "steps": ["d = √((2+2)²+(5-1)²)=√(16+16)=√32≈5.66"],
+      "solution": ["5.66"],
+      "distractors": ["5","6","5.5"],
+      "hint": "Gebruik afstandsformule"
+    },
+    {
+      "text": "Vind middelpunt van A(-3,4) en B(5,8)",
+      "steps": ["M = ((-3+5)/2,(4+8)/2)=(1,6)"],
+      "solution": ["(1,6)"],
+      "distractors": ["(0,5)","(1,5)","(2,6)"],
+      "hint": "Middelpunt = gemiddelde van koördinate"
+    },
+    {
+      "text": "Vind helling van lyn deur (-1,3) en (2,9)",
+      "steps": ["m = (9-3)/(2-(-1))=6/3=2"],
+      "solution": ["2"],
+      "distractors": ["3","1","1.5"],
+      "hint": "Δy/Δx"
+    },
+    {
+      "text": "Vind afstand tussen P(0,0) en Q(3,4)",
+      "steps": ["d = √(3²+4²)=√(9+16)=√25=5"],
+      "solution": ["5"],
+      "distractors": ["4","6","7"],
+      "hint": "Gebruik afstandsformule"
+    },
+    {
+      "text": "Vind middelpunt van P(1,-1) en Q(5,3)",
+      "steps": ["M=((1+5)/2,(-1+3)/2)=(3,1)"],
+      "solution": ["(3,1)"],
+      "distractors": ["(2,1)","(3,0)","(4,1)"],
+      "hint": "Middelpunt = gemiddelde"
+    },
+    {
+      "text": "Vind helling van lyn deur (0,0) en (4,8)",
+      "steps": ["m = (8-0)/(4-0)=8/4=2"],
+      "solution": ["2"],
+      "distractors": ["1","4","3"],
+      "hint": "Hellingsformule: Δy/Δx"
+    },
+    {
+      "text": "Vind afstand tussen P(-2,-3) en Q(2,1)",
+      "steps": ["d = √((2+2)²+(1+3)²)=√(16+16)=√32≈5.66"],
+      "solution": ["5.66"],
+      "distractors": ["5","6","5.5"],
+      "hint": "Gebruik afstandsformule"
+    }
   ]
 }
+
