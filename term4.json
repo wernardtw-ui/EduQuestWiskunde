@@ -1,20 +1,221 @@
-[
-  {
-    "text": "Los op: 3x + 7 = 16. Wat is x?",
-    "solution": ["3"],
-    "distractors": ["2", "4", "5"],
-    "hint": "Trek 7 af en deel deur 3."
-  },
-  {
-    "text": "Wat is die waarde van 15 ÷ 3?",
-    "solution": ["5"],
-    "distractors": ["3", "4", "6"],
-    "hint": "Hoeveel keer gaan 3 in 15?"
-  },
-  {
-    "text": "Wat is 7 × 4?",
-    "solution": ["28"],
-    "distractors": ["21", "24", "32"],
-    "hint": "Vermenigvuldig 7 met 4."
-  }
-]
+{
+  "Data Handling": [
+    {
+      "text": "Vind die gemiddelde van 5, 7, 9, 10",
+      "steps": [
+        "Tel al die getalle op: 5+7+9+10 = 31",
+        "Aantal getalle = 4",
+        "Gemiddelde = 31 ÷ 4",
+        "Gemiddelde ≈ 7.75"
+      ],
+      "solution": ["7.75"],
+      "distractors": ["7","8","7.5"],
+      "hint": "Gemiddelde = som van getalle ÷ aantal getalle."
+    },
+    {
+      "text": "Vind die mediaan van 3, 8, 5, 10, 7",
+      "steps": [
+        "Rangskik getalle: 3,5,7,8,10",
+        "Mediaan = middelste term",
+        "Mediaan = 7"
+      ],
+      "solution": ["7"],
+      "distractors": ["5","8","6"],
+      "hint": "Mediaan is die middelste waarde na rangskik."
+    },
+    {
+      "text": "Vind die modus van 4, 4, 5, 6, 4, 7, 5",
+      "steps": [
+        "Tel frekwensie van elke getal",
+        "4 kom 3 keer voor, ander minder",
+        "Modus = 4"
+      ],
+      "solution": ["4"],
+      "distractors": ["5","6","7"],
+      "hint": "Modus is die getal wat die meeste keer voorkom."
+    },
+    {
+      "text": "Skets ’n staafgrafiek vir: Maande = Jan, Feb, Mar; Verkope = 5, 7, 6",
+      "steps": [
+        "Teken x-as: Maande, y-as: Verkope",
+        "Skets stawe vir Jan=5, Feb=7, Mar=6"
+      ],
+      "solution": ["Staafgrafiek korrek geskat"],
+      "distractors": ["Verkeerde waardes op grafiek","Omgekeerde asse","Stawe verkeerd geskaal"],
+      "hint": "Elke maand kry ’n staaf met hoogte = verkope."
+    },
+    {
+      "text": "Vind die uitsonderlike waarde (outlier) in 2, 4, 5, 50, 6",
+      "steps": [
+        "Kyk na waardes wat baie anders is",
+        "50 is veel groter as ander",
+        "Uitsonderlike waarde = 50"
+      ],
+      "solution": ["50"],
+      "distractors": ["2","5","6"],
+      "hint": "Uitsonderlike waarde is ver van meeste ander waardes."
+    },
+    {
+      "text": "Bereken die gemiddelde van 12, 15, 18",
+      "steps": [
+        "Som van getalle = 12+15+18 = 45",
+        "Aantal getalle = 3",
+        "Gemiddelde = 45 ÷ 3 = 15"
+      ],
+      "solution": ["15"],
+      "distractors": ["12","18","16"],
+      "hint": "Gemiddelde = som ÷ aantal."
+    },
+    {
+      "text": "Vind die mediaan van 1, 3, 3, 6, 7, 8, 9",
+      "steps": [
+        "Rangskik: 1,3,3,6,7,8,9",
+        "Mediaan = middelste term = 6"
+      ],
+      "solution": ["6"],
+      "distractors": ["3","7","5"],
+      "hint": "Mediaan is middelste waarde."
+    },
+    {
+      "text": "Vind die modus van 2, 4, 4, 5, 2, 2",
+      "steps": [
+        "Tel frekwensie: 2 kom 3 keer, 4 kom 2 keer",
+        "Modus = 2"
+      ],
+      "solution": ["2"],
+      "distractors": ["4","5","3"],
+      "hint": "Modus = mees algemene waarde."
+    },
+    {
+      "text": "Skets ’n histogram vir: 0-10:5, 10-20:8, 20-30:3",
+      "steps": [
+        "Teken x-as vir intervalle",
+        "Teken y-as vir frekwensie",
+        "Skets stawe met korrekte hoogte"
+      ],
+      "solution": ["Histogram korrek"],
+      "distractors": ["Verkeerde intervalle","Stawe verkeerd","Foutiewe frekwensie"],
+      "hint": "Stawe = frekwensie van intervalle."
+    },
+    {
+      "text": "Vind die gemiddelde van 8, 10, 12, 14",
+      "steps": [
+        "Som van getalle = 44",
+        "Aantal = 4",
+        "Gemiddelde = 44 ÷4 =11"
+      ],
+      "solution": ["11"],
+      "distractors": ["10","12","9"],
+      "hint": "Som ÷ aantal."
+    }
+  ],
+  "Probability": [
+    {
+      "text": "Watter is die kans om 'n 6 te gooi met 'n dobbelsteen?",
+      "steps": [
+        "Aantal gunstige uitkomste = 1",
+        "Totale uitkomste =6",
+        "Kans = 1 ÷6"
+      ],
+      "solution": ["1/6"],
+      "distractors": ["1/5","1/3","1/2"],
+      "hint": "Een gunstige uitkoms van 6 moontlike."
+    },
+    {
+      "text": "Watter is die kans om 'n rooi kaart uit 'n pak van 52 kaarte te trek?",
+      "steps": [
+        "Rooi kaarte = 26",
+        "Totale kaarte =52",
+        "Kans =26 ÷52 =1/2"
+      ],
+      "solution": ["1/2"],
+      "distractors": ["1/4","1/3","1/6"],
+      "hint": "Daar is 26 rooi kaarte in standaard pak."
+    },
+    {
+      "text": "Watter is die kans om 'n pariteitsnommer (even) van 1-10 te kry?",
+      "steps": [
+        "Even nommers = 2,4,6,8,10 (5 getalle)",
+        "Totale =10",
+        "Kans =5 ÷10 =1/2"
+      ],
+      "solution": ["1/2"],
+      "distractors": ["1/3","1/5","1/4"],
+      "hint": "Tel die even nommers."
+    },
+    {
+      "text": "Wat is die kans om 'n muntstuk te gooi en kop te kry?",
+      "steps": [
+        "Muntstuk = 2 kante",
+        "Kans =1 ÷2"
+      ],
+      "solution": ["1/2"],
+      "distractors": ["1/3","1/4","1/5"],
+      "hint": "Een gunstige uitkoms van twee moontlike."
+    },
+    {
+      "text": "Vind die eksperimentele kans: 3 blou ball uit 12 totale",
+      "steps": [
+        "Aantal gunstige =3",
+        "Totale =12",
+        "Kans =3 ÷12 =1/4"
+      ],
+      "solution": ["1/4"],
+      "distractors": ["1/3","1/2","1/6"],
+      "hint": "Aantal gunstige ÷ totaal."
+    },
+    {
+      "text": "Vind die teoretiese kans om 'n 4 of 5 met dobbelsteen te gooi",
+      "steps": [
+        "Aantal gunstige =2 (4 en 5)",
+        "Totale =6",
+        "Kans =2 ÷6 =1/3"
+      ],
+      "solution": ["1/3"],
+      "distractors": ["1/2","1/6","1/4"],
+      "hint": "Tel gunstige uitkomste."
+    },
+    {
+      "text": "Kans om nie ’n 6 te gooi met dobbelsteen nie",
+      "steps": [
+        "Kans = 1 - kans van 6",
+        "Kans = 1 -1/6 =5/6"
+      ],
+      "solution": ["5/6"],
+      "distractors": ["1/6","4/6","2/3"],
+      "hint": "1 minus kans van die gebeurtenis."
+    },
+    {
+      "text": "Vind die kans om 'n rooiballetjie te trek uit 5 rooi en 7 blou",
+      "steps": [
+        "Totale ball =12",
+        "Rooi =5",
+        "Kans =5 ÷12"
+      ],
+      "solution": ["5/12"],
+      "distractors": ["7/12","1/2","1/3"],
+      "hint": "Aantal gunstige ÷ totaal."
+    },
+    {
+      "text": "Kans om 'n getal <5 te gooi met dobbelsteen",
+      "steps": [
+        "Getalle <5: 1,2,3,4 → 4 getalle",
+        "Totale =6",
+        "Kans =4 ÷6 =2/3"
+      ],
+      "solution": ["2/3"],
+      "distractors": ["1/2","1/3","5/6"],
+      "hint": "Tel gunstige uitkomste."
+    },
+    {
+      "text": "Eksperimentele kans: 2 suksesvolle uit 8 probeerslae",
+      "steps": [
+        "Kans =2 ÷8",
+        "Kans =1/4"
+      ],
+      "solution": ["1/4"],
+      "distractors": ["1/3","1/2","1/5"],
+      "hint": "Aantal sukses ÷ totaal probeerslae."
+    }
+  ]
+}

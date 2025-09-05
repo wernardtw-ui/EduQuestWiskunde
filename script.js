@@ -1,125 +1,154 @@
-let currentTerm = null;
 let questions = [];
-let currentQuestionIndex = 0;
+let currentIndex = 0;
+let selectedSubject = "";
+let termData = {};
+let currentSequence = [];
+let placedSteps = [];
 
-// Load a term (term1, term2, etc.)
-function loadTerm(term) {
-    fetch(`${term}.json`)
-        .then(response => response.json())
-        .then(data => {
-            currentTerm = term;
-            questions = data;
-            currentQuestionIndex = 0;
-            document.getElementById('game-area').style.display = 'block';
-            showQuestion();
-        })
-        .catch(err => {
-            console.error("Error loading term:", err);
-            alert("Kon nie die vrae laai nie. Maak seker " + term + ".json bestaan.");
-        });
-}
+document.getElementById("termSelect").addEventListener("change", async (e) => {
+  const termFile = e.target.value;
+  if (!termFile) return;
 
-// Show current question
+  try {
+    const res = await fetch(termFile);
+    termData = await res.json();
+
+    const subjectSelect = document.getElementById("subjectSelect");
+    subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+    Object.keys(termData).forEach(sub => {
+      const opt = document.createElement("option");
+      opt.value = sub;
+      opt.textContent = sub;
+      subjectSelect.appendChild(opt);
+    });
+    subjectSelect.disabled = false;
+  } catch (err) {
+    console.error("Error loading term file:", err);
+  }
+});
+
+document.getElementById("startBtn").addEventListener("click", () => {
+  const subject = document.getElementById("subjectSelect").value;
+  if (!subject) {
+    alert("Please select a subject first!");
+    return;
+  }
+  selectedSubject = subject;
+  questions = termData[subject];
+  currentIndex = 0;
+  showQuestion();
+});
+
+document.getElementById("hintBtn").addEventListener("click", () => {
+  const hintBox = document.getElementById("hintBox");
+  if (questions[currentIndex] && questions[currentIndex].hint) {
+    hintBox.textContent = "💡 Hint: " + questions[currentIndex].hint;
+    hintBox.style.display = "block";
+  }
+});
+
 function showQuestion() {
-    const q = questions[currentQuestionIndex];
-    const questionText = document.getElementById('questionText');
-    const slotsDiv = document.getElementById('slots');
-    const optionsDiv = document.getElementById('options');
+  if (currentIndex >= questions.length) {
+    celebrate();
+    return;
+  }
 
-    questionText.innerHTML = q.text;
+  const q = questions[currentIndex];
+  document.getElementById("question").textContent = q.text;
+  document.getElementById("dropSlot").innerHTML = "Drop steps here...";
+  placedSteps = [];
 
-    // Clear slots & options
-    slotsDiv.innerHTML = '';
-    optionsDiv.innerHTML = '';
+  currentSequence = [...q.steps, q.solution]; // last is solution
+  let allOptions = [...currentSequence, ...q.distractors];
 
-    // Create slots
-    q.solution.forEach((_, i) => {
-        const slot = document.createElement('div');
-        slot.className = 'drop-slot';
-        slot.dataset.index = i;
-        slot.addEventListener('dragover', allowDrop);
-        slot.addEventListener('drop', drop);
-        slotsDiv.appendChild(slot);
+  shuffle(allOptions);
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+  allOptions.forEach(opt => {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.textContent = opt;
+    div.draggable = true;
+
+    div.addEventListener("dragstart", (ev) => {
+      ev.dataTransfer.setData("text", opt);
     });
 
-    // Create options (shuffled)
-    const shuffledOptions = shuffleArray([...q.solution, ...q.distractors]);
-    shuffledOptions.forEach(optionText => {
-        const option = document.createElement('div');
-        option.className = 'option';
-        option.draggable = true;
-        option.innerText = optionText;
-        option.addEventListener('dragstart', dragStart);
-        optionsDiv.appendChild(option);
-    });
+    optionsDiv.appendChild(div);
+  });
 
-    // Add hint button if available
-    if (q.hint) {
-        const hintBtn = document.createElement('button');
-        hintBtn.className = 'hint-btn';
-        hintBtn.innerText = '💡 Hint';
-        hintBtn.onclick = () => alert(q.hint);
-        questionText.appendChild(hintBtn);
-    }
-}
+  const dropSlot = document.getElementById("dropSlot");
+  dropSlot.addEventListener("dragover", (ev) => ev.preventDefault());
+  dropSlot.addEventListener("drop", (ev) => {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
 
-// Drag-and-drop functions
-let draggedItem = null;
+    if (data === currentSequence[placedSteps.length]) {
+      placedSteps.push(data);
+      const stepDiv = document.createElement("div");
+      stepDiv.textContent = data;
+      dropSlot.appendChild(stepDiv);
+      dropSlot.classList.add("correct");
 
-function dragStart(e) {
-    draggedItem = e.target;
-}
+      setTimeout(() => dropSlot.classList.remove("correct"), 800);
 
-function allowDrop(e) {
-    e.preventDefault();
-}
-
-function drop(e) {
-    e.preventDefault();
-    const slotIndex = e.target.dataset.index;
-    const q = questions[currentQuestionIndex];
-    const correctAnswer = q.solution[slotIndex];
-
-    if (draggedItem.innerText === correctAnswer) {
-        // ✅ Correct animation
-        e.target.innerText = draggedItem.innerText;
-        e.target.classList.add('filled');
-        e.target.classList.add('correct');
-        setTimeout(() => e.target.classList.remove('correct'), 800);
-        draggedItem.style.display = 'none';
-        checkAllSlotsFilled();
+      if (placedSteps.length === currentSequence.length) {
+        currentIndex++;
+        setTimeout(showQuestion, 1000);
+      }
     } else {
-        // ❌ Incorrect animation
-        draggedItem.classList.add('shake');
-        setTimeout(() => draggedItem.classList.remove('shake'), 500);
+      const optionDivs = document.querySelectorAll(".option");
+      optionDivs.forEach(o => {
+        if (o.textContent === data) {
+          o.classList.add("shake");
+          setTimeout(() => o.classList.remove("shake"), 500);
+        }
+      });
     }
+  });
 }
 
-// Check if all slots filled correctly
-function checkAllSlotsFilled() {
-    const slots = document.querySelectorAll('.drop-slot');
-    const allFilled = Array.from(slots).every(slot => slot.classList.contains('filled'));
-    if (allFilled) {
-        alert("👍 Goed gedaan! Klik Volgende Vraag om voort te gaan.");
-    }
+function celebrate() {
+  const celebration = document.getElementById("celebration");
+  celebration.style.display = "block";
+
+  // Confetti effect
+  for (let i = 0; i < 150; i++) {
+    const confetti = document.createElement("div");
+    confetti.textContent = "🎊";
+    confetti.style.position = "fixed";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.top = "-20px";
+    confetti.style.fontSize = "20px";
+    confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+    confetti.style.zIndex = "9997";
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 5000);
+  }
 }
 
-// Next question
-function nextQuestion() {
-    if (!currentTerm) return;
-    if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        showQuestion();
-    } else {
-        alert("Jy het al die vrae voltooi! 🎉");
-    }
-}
+// Confetti fall animation
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}`;
+document.head.appendChild(style);
 
-// Utility: shuffle array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+// Always keep SA flag visible
+document.addEventListener("DOMContentLoaded", () => {
+  const flagBanner = document.querySelector('.flag-banner');
+  if (flagBanner) flagBanner.style.zIndex = "10000";
+});
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
 }

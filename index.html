@@ -1,202 +1,195 @@
 <!DOCTYPE html>
-<html lang="af">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduQuestWiskunde – Graad 9 SA</title>
+  <title>EduQuest Wiskunde – Grade 9</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f5f9ff;
       margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #ffecd2, #fcb69f);
-      color: #1f2937;
+      padding: 0;
       text-align: center;
     }
 
-    h1 {
-      color: #ffffff;
-      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
+    header {
+      background: #007847;
+      color: white;
+      padding: 12px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .controls {
+      margin: 16px;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      margin: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    #question {
+      font-size: 18px;
+      margin: 20px;
+    }
+
+    .options {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px;
+    }
+
+    .option {
+      background: #fff;
+      padding: 10px 14px;
+      border: 2px solid #007847;
+      border-radius: 8px;
+      cursor: grab;
+      transition: 0.3s;
+    }
+
+    .option:hover {
+      background: #e8f5e9;
+    }
+
+    .drop-slot {
+      margin: 12px auto;
+      padding: 14px;
+      border: 2px dashed #999;
+      border-radius: 8px;
+      width: 260px;
+      min-height: 40px;
+      background: #fafafa;
+    }
+
+    .hint-box {
+      margin: 10px;
+      font-style: italic;
+      color: #444;
+      display: none;
+    }
+
+    /* Celebration Modal */
+    #celebration {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      z-index: 9998;
+    }
+
+    #celebration h2 {
+      color: #007847;
+    }
+
+    /* SA Flag + Slogan */
+    .flag-banner {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .sa-flag {
+      width: 60px;
+      height: auto;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .slogan {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background: linear-gradient(
+        90deg,
+        #007847, #ffb612, #000000, #de3831, #002395, #ffffff
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-size: 2.2rem;
-      margin-bottom: 20px;
+      background-clip: text;
+      text-fill-color: transparent;
     }
 
-    .btn {
-      margin: 10px;
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: none;
-      font-size: 1rem;
-      font-weight: bold;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Animations */
+    .drop-slot.correct {
+      animation: correctFlash 0.8s ease;
+      background-color: #c8e6c9 !important;
+      border-color: #2ecc71 !important;
     }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    .option.shake {
+      animation: shake 0.5s;
     }
-    .btn-term1 { background: #ff6b6b; }
-    .btn-term2 { background: #48dbfb; }
-    .btn-term3 { background: #1dd1a1; }
-    .btn-term4 { background: #feca57; }
-
-    #topics {
-      margin: 20px auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
+    @keyframes correctFlash {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); background-color: #2ecc71; }
+      100% { transform: scale(1); background-color: #fafafa; }
     }
-    #topics button {
-      background: #5f27cd;
-      color: white;
-      border-radius: 10px;
-      padding: 10px 14px;
-    }
-
-    #game-area {
-      margin-top: 30px;
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #questionText {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    #slots {
-      margin: 15px 0;
-    }
-    .drop-slot {
-      border: 2px dashed #999;
-      padding: 10px;
-      margin: 5px;
-      border-radius: 10px;
-      min-width: 140px;
-      min-height: 30px;
-      display: inline-block;
-      background: #f1f2f6;
-    }
-    .drop-slot.filled {
-      background: #c8e6c9;
-      border: 2px solid #2ecc71;
-    }
-
-    #options {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-    .option {
-      background: #ffdd59;
-      color: #333;
-      font-weight: bold;
-      padding: 8px 14px;
-      border-radius: 10px;
-      cursor: grab;
-      border: 2px solid #ffa801;
-      transition: transform 0.2s ease;
-    }
-    .option:hover {
-      transform: scale(1.1);
-      background: #ffc048;
-    }
-    .option.dragging { opacity: 0.5; }
-
-    .hint-btn {
-      background: #ff6b81;
-      border: none;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 8px;
-      margin-left: 8px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-    .hint-btn:hover { background: #e55039; }
-
-    .next-btn {
-      margin-top: 20px;
-      background: #10ac84;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .next-btn:hover {
-      transform: scale(1.05);
-      background: #1dd1a1;
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Welkom by EduQuestWiskunde 🎉</h1>
-/* Correct slot lights green */
-.drop-slot.correct {
-    animation: correctFlash 0.8s ease;
-    background-color: #c8e6c9 !important;
-    border-color: #2ecc71 !important;
-}
+  <header>EduQuest Wiskunde – Graad 9</header>
 
-/* Incorrect option shakes */
-.option.shake {
-    animation: shake 0.5s;
-}
-
-/* Keyframes for correct */
-@keyframes correctFlash {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); background-color: #2ecc71; }
-    100% { transform: scale(1); background-color: #f1f2f6; }
-}
-
-/* Keyframes for shake */
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-  <!-- Term buttons -->
-  <button class="btn btn-term1" onclick="loadTerm('term1')">📘 Laai Term 1</button>
-  <button class="btn btn-term2" onclick="loadTerm('term2')">📗 Laai Term 2</button>
-  <button class="btn btn-term3" onclick="loadTerm('term3')">📕 Laai Term 3</button>
-  <button class="btn btn-term4" onclick="loadTerm('term4')">📙 Laai Term 4</button>
-
-  <!-- Topic selection -->
-  <div id="topics"></div>
-
-  <!-- Game area -->
-  <div id="game-area" style="display:none;">
-    <p id="questionText"></p>
-    <div id="slots"></div>
-    <div id="options"></div>
-    <button class="next-btn" onclick="nextQuestion()">➡️ Volgende Vraag</button>
+  <!-- Flag & Slogan -->
+  <div class="flag-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg" 
+         alt="SA Flag" class="sa-flag">
+    <span class="slogan">Proudly South African</span>
   </div>
 
-  <!-- Load script with cache-busting -->
-  <script>
-    const version = Date.now();
-    const script = document.createElement("script");
-    script.src = "script.js?v=" + version;
-    document.body.appendChild(script);
-  </script>
+  <div class="controls">
+    <select id="termSelect">
+      <option value="">Select Term</option>
+      <option value="term1.json">Term 1</option>
+      <option value="term2.json">Term 2</option>
+      <option value="term3.json">Term 3</option>
+      <option value="term4.json">Term 4</option>
+    </select>
+
+    <select id="subjectSelect" disabled>
+      <option value="">Select Subject</option>
+    </select>
+
+    <button id="startBtn">Start</button>
+    <button id="hintBtn">Show Hint</button>
+  </div>
+
+  <div id="question"></div>
+  <div class="drop-slot" id="dropSlot">Drop steps here...</div>
+  <div class="options" id="options"></div>
+  <div class="hint-box" id="hintBox"></div>
+
+  <!-- Celebration -->
+  <div id="celebration">
+    <h2>🎉 Congratulations! 🎉</h2>
+    <p>You completed all questions!</p>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

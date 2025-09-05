@@ -1,20 +1,228 @@
-[
-  {
-    "text": "Los op: 9x = 81. Wat is x?",
-    "solution": ["9"],
-    "distractors": ["8", "10", "7"],
-    "hint": "Deel beide kante deur 9."
-  },
-  {
-    "text": "Wat is die kwadraat van 6?",
-    "solution": ["36"],
-    "distractors": ["12", "18", "30"],
-    "hint": "Kwadraat beteken 6 × 6."
-  },
-  {
-    "text": "Wat is die gemiddelde van 4, 6, 8?",
-    "solution": ["6"],
-    "distractors": ["5", "7", "8"],
-    "hint": "Som die getalle op en deel deur die hoeveelheid getalle."
-  }
-]
+{
+  "Geometry": [
+    {
+      "text": "Vind die omtrek van ’n reghoek met lengtes 8 cm en 5 cm",
+      "steps": [
+        "Omtrek = 2 × (lengte + breedte)",
+        "Omtrek = 2 × (8 + 5)",
+        "Omtrek = 2 × 13",
+        "Omtrek = 26 cm"
+      ],
+      "solution": ["26"],
+      "distractors": ["13","40","16"],
+      "hint": "Omtrek van reghoek = 2(lengte + breedte)."
+    },
+    {
+      "text": "Vind die oppervlakte van ’n driehoek met basis 6 cm en hoogte 4 cm",
+      "steps": [
+        "Oppervlakte = ½ × basis × hoogte",
+        "Oppervlakte = ½ × 6 × 4",
+        "Oppervlakte = 12 cm²"
+      ],
+      "solution": ["12"],
+      "distractors": ["10","24","8"],
+      "hint": "Oppervlakte driehoek = ½ × basis × hoogte."
+    },
+    {
+      "text": "Vind die volume van ’n kubus met sykant 3 cm",
+      "steps": [
+        "Volume = sykant³",
+        "Volume = 3³",
+        "Volume = 27 cm³"
+      ],
+      "solution": ["27"],
+      "distractors": ["9","18","30"],
+      "hint": "Volume kubus = sykant × sykant × sykant."
+    },
+    {
+      "text": "Vind die oppervlakte van ’n sirkel met radius 5 cm (π≈3.14)",
+      "steps": [
+        "Oppervlakte = π × r²",
+        "Oppervlakte = 3.14 × 5²",
+        "Oppervlakte = 3.14 × 25",
+        "Oppervlakte ≈ 78.5 cm²"
+      ],
+      "solution": ["78.5"],
+      "distractors": ["25","50","100"],
+      "hint": "Gebruik formule πr²."
+    },
+    {
+      "text": "Vind die lengte van die skuins in ’n regterdriehoek met kante 6 cm en 8 cm",
+      "steps": [
+        "Gebruik Pythagoras: a² + b² = c²",
+        "6² + 8² = c²",
+        "36 + 64 = c²",
+        "c² = 100 → c = √100 = 10 cm"
+      ],
+      "solution": ["10"],
+      "distractors": ["8","12","14"],
+      "hint": "Pythagoras: skuins² = korter kante² + korter kante²."
+    },
+    {
+      "text": "Vind die oppervlakte van ’n vierkant met sykant 7 cm",
+      "steps": [
+        "Oppervlakte = sykant²",
+        "Oppervlakte = 7²",
+        "Oppervlakte = 49 cm²"
+      ],
+      "solution": ["49"],
+      "distractors": ["14","28","36"],
+      "hint": "Vierkant oppervlakte = sykant × sykant."
+    },
+    {
+      "text": "Vind die volume van ’n reghoekige prisma met l=4 cm, b=3 cm, h=5 cm",
+      "steps": [
+        "Volume = lengte × breedte × hoogte",
+        "Volume = 4 × 3 × 5",
+        "Volume = 60 cm³"
+      ],
+      "solution": ["60"],
+      "distractors": ["12","15","20"],
+      "hint": "Volume = l × b × h."
+    },
+    {
+      "text": "Vind die middelpunt van die segment tussen (2,3) en (6,7)",
+      "steps": [
+        "Middelpunt formule: ((x₁+x₂)/2 , (y₁+y₂)/2)",
+        "((2+6)/2 , (3+7)/2)",
+        "Middelpunt = (8/2 , 10/2)",
+        "Middelpunt = (4,5)"
+      ],
+      "solution": ["4,5"],
+      "distractors": ["3,4","5,6","2,5"],
+      "hint": "Tel x's bymekaar, deel deur 2, dieselfde vir y's."
+    },
+    {
+      "text": "Vind die afstand tussen (1,2) en (4,6)",
+      "steps": [
+        "Afstand = √((x₂-x₁)² + (y₂-y₁)²)",
+        "Afstand = √((4-1)² + (6-2)²)",
+        "Afstand = √(3² + 4²)",
+        "Afstand = √(9+16) = √25 = 5"
+      ],
+      "solution": ["5"],
+      "distractors": ["7","4","6"],
+      "hint": "Gebruik afstandsformule in koordinatestelsel."
+    },
+    {
+      "text": "Vind die oppervlakte van ’n parallelogram met basis 8 cm en hoogte 5 cm",
+      "steps": [
+        "Oppervlakte = basis × hoogte",
+        "Oppervlakte = 8 ×5",
+        "Oppervlakte = 40 cm²"
+      ],
+      "solution": ["40"],
+      "distractors": ["13","20","48"],
+      "hint": "Gebruik oppervlakte formule vir parallelogram."
+    }
+  ],
+  "Measurement": [
+    {
+      "text": "Los op: 5x + 3 = 23",
+      "steps": [
+        "5x = 23 -3",
+        "5x = 20",
+        "x = 20 ÷5",
+        "x = 4"
+      ],
+      "solution": ["4"],
+      "distractors": ["5","6","3"],
+      "hint": "Trek 3 af en deel deur 5."
+    },
+    {
+      "text": "Los op: 3x -7 = 8",
+      "steps": [
+        "3x = 8 +7",
+        "3x = 15",
+        "x = 15 ÷3",
+        "x =5"
+      ],
+      "solution": ["5"],
+      "distractors": ["6","4","3"],
+      "hint": "Tel 7 by beide kante en deel deur 3."
+    },
+    {
+      "text": "Los op: 2(x+3) = 14",
+      "steps": [
+        "2x +6 =14",
+        "2x = 8",
+        "x = 4"
+      ],
+      "solution": ["4"],
+      "distractors": ["5","6","3"],
+      "hint": "Maak hakies oop en los vir x."
+    },
+    {
+      "text": "Los op: 4x - 5 = 11",
+      "steps": [
+        "4x = 16",
+        "x =4"
+      ],
+      "solution": ["4"],
+      "distractors": ["3","5","6"],
+      "hint": "Tel 5 by en deel deur 4."
+    },
+    {
+      "text": "Los op: x/3 +2 =6",
+      "steps": [
+        "x/3 =4",
+        "x =12"
+      ],
+      "solution": ["12"],
+      "distractors": ["8","14","10"],
+      "hint": "Trek 2 af en vermenigvuldig deur 3."
+    },
+    {
+      "text": "Los op: 2x -4 =10",
+      "steps": [
+        "2x =14",
+        "x =7"
+      ],
+      "solution": ["7"],
+      "distractors": ["6","8","5"],
+      "hint": "Tel 4 by beide kante en deel deur 2."
+    },
+    {
+      "text": "Los op: 3(x-2)=9",
+      "steps": [
+        "3x -6=9",
+        "3x =15",
+        "x =5"
+      ],
+      "solution": ["5"],
+      "distractors": ["4","6","3"],
+      "hint": "Maak hakies oop en los vir x."
+    },
+    {
+      "text": "Los op: 5(x+1)=20",
+      "steps": [
+        "5x +5=20",
+        "5x =15",
+        "x =3"
+      ],
+      "solution": ["3"],
+      "distractors": ["4","5","2"],
+      "hint": "Maak hakies oop en los vir x."
+    },
+    {
+      "text": "Los op: 4x +7 =19",
+      "steps": [
+        "4x =12",
+        "x =3"
+      ],
+      "solution": ["3"],
+      "distractors": ["4","5","2"],
+      "hint": "Trek 7 af en deel deur 4."
+    },
+    {
+      "text": "Los op: 6x -5 =13",
+      "steps": [
+        "6x =18",
+        "x =3"
+      ],
+      "solution": ["3"],
+      "distractors": ["4","5","2"],
+      "hint": "Tel 5 by en deel deur 6."
+    }
+  ]
+}
