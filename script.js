@@ -1,3 +1,4 @@
+
 let questions = [];
 let currentIndex = 0;
 let selectedSubject = "";
@@ -112,6 +113,7 @@ function showQuestion() {
 function celebrate() {
   const celebration = document.getElementById("celebration");
   celebration.style.display = "block";
+  celebration.innerHTML = "<h2>🎉 Congratulations! You finished all questions! 🎉</h2>";
 
   // Confetti effect
   for (let i = 0; i < 150; i++) {
@@ -128,6 +130,7 @@ function celebrate() {
     setTimeout(() => confetti.remove(), 5000);
   }
 }
+
 
 // Confetti fall animation
 const style = document.createElement("style");
